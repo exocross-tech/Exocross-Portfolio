@@ -9,10 +9,6 @@ import {
   Volume2,
   VolumeX,
   Maximize2,
-  Sparkles,
-  Layers,
-  ShieldCheck,
-  Video,
 } from "lucide-react";
 
 export default function HeroSection() {
@@ -107,37 +103,17 @@ export default function HeroSection() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
         {/* Left Column: Core Narrative */}
         <div className="lg:col-span-6 flex flex-col items-start text-left">
-          {/* Status Badge */}
-          <div
-            onMouseEnter={() => sound.playHover()}
-            className="inline-flex items-center gap-2 sm:gap-2.5 px-3 py-1.5 rounded-full bg-white/[0.05] border border-cyan-500/30 backdrop-blur-md mb-5 sm:mb-6 shadow-[0_0_20px_rgba(6,182,212,0.15)] max-w-full"
-          >
-            <span className="relative flex h-2 w-2 shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500" />
-            </span>
-            <span className="text-[10px] sm:text-[11px] font-mono tracking-wider uppercase text-cyan-300 font-medium truncate">
-              NEXT-GEN SOFTWARE & IT STUDIO
-            </span>
-            <span className="text-gray-500 hidden sm:inline">|</span>
-            <span className="text-[10px] sm:text-[11px] font-mono tracking-wider text-gray-400 hidden sm:inline">
-              Q3/Q4 OPEN
-            </span>
-          </div>
-
           {/* Main Headline */}
-          <h1 className="text-3xl sm:text-5xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-white leading-[1.12] mb-5">
-            Software, built for how your business{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-300 decoration-cyan-500/40">
-              actually works.
+          <h1 className="text-3xl sm:text-5xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-white leading-[1.15] mb-5">
+            We consults, We build,{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-300">
+              We renovate, We reduce.
             </span>
           </h1>
 
-          {/* Description verbatim from company profile */}
-          <p className="text-sm sm:text-base lg:text-lg text-gray-300/90 max-w-2xl font-light leading-relaxed mb-6 sm:mb-8">
-            Exocross designs and builds custom web & mobile applications, puts AI to practical
-            use, and helps forward-thinking companies extract maximum performance from their
-            technology investments. Clear, dependable, and built to last.
+          {/* Description */}
+          <p className="text-base sm:text-lg lg:text-xl text-gray-300/90 max-w-2xl font-light leading-relaxed mb-6 sm:mb-8">
+            Exocross helps companies to utilize technology.
           </p>
 
           {/* Action CTAs */}
@@ -161,43 +137,16 @@ export default function HeroSection() {
               <span>Consult Our Team</span>
             </button>
           </div>
-
-          {/* Dual Operating Model Pill */}
-          <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-xs font-mono text-gray-400 w-full">
-            <div className="flex items-center gap-2">
-              <Layers className="w-4 h-4 text-cyan-400 shrink-0" />
-              <span>Two Ways: Client IT Services + Own Products</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-blue-400 shrink-0" />
-              <span>Full IP & Source Code Handover</span>
-            </div>
-          </div>
         </div>
 
         {/* Right Column: Hero Video Showcase (1.mp4) & Interactive Frame */}
         <div className="lg:col-span-6 w-full">
           <div
             onMouseEnter={() => sound.playHover()}
-            className="relative rounded-2xl sm:rounded-3xl p-2 sm:p-3 glass-panel-glow border border-cyan-500/30 shadow-[0_15px_45px_rgba(0,0,0,0.7)] group hover:border-cyan-400/60 transition-all duration-500"
+            className="relative rounded-2xl sm:rounded-3xl p-1.5 sm:p-2 glass-panel-glow border border-cyan-500/30 shadow-[0_15px_45px_rgba(0,0,0,0.7)] group hover:border-cyan-400/60 transition-all duration-500"
           >
             {/* Ambient Video Glow Backdrop */}
             <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-blue-600/30 via-cyan-400/20 to-indigo-600/30 blur-xl opacity-60 group-hover:opacity-100 transition duration-700 pointer-events-none" />
-
-            {/* Top Video Header Bar */}
-            <div className="relative z-10 flex items-center justify-between px-3 py-2 border-b border-white/10 text-xs font-mono mb-2">
-              <div className="flex items-center gap-2 text-cyan-300 font-semibold truncate">
-                <Video className="w-4 h-4 text-cyan-400 shrink-0" />
-                <span className="truncate">EXOCROSS SHOWREEL // 1.MP4</span>
-              </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <span className="px-2 py-0.5 rounded text-[10px] bg-red-500/20 border border-red-500/40 text-red-400 font-bold uppercase tracking-wider flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
-                  REEL
-                </span>
-                <span className="text-[10px] text-gray-400 hidden sm:inline">4K 60FPS</span>
-              </div>
-            </div>
 
             {/* Video Player Container */}
             <div className="relative z-10 w-full aspect-video rounded-xl sm:rounded-2xl overflow-hidden bg-black/90 border border-white/10 group/player">
@@ -293,30 +242,12 @@ export default function HeroSection() {
                 </div>
               </div>
             </div>
-
-            {/* Compact Telemetry Under Video */}
-            <div className="relative z-10 mt-3 pt-2 grid grid-cols-2 gap-2 text-xs font-mono">
-              <div className="bg-black/50 p-2.5 rounded-xl border border-white/5 flex items-center justify-between">
-                <div>
-                  <span className="text-[9px] text-gray-500 block uppercase">CLIENT SERVICES</span>
-                  <span className="text-white font-bold text-[11px] sm:text-xs">8 Disciplines</span>
-                </div>
-                <Sparkles className="w-4 h-4 text-cyan-400" />
-              </div>
-              <div className="bg-black/50 p-2.5 rounded-xl border border-white/5 flex items-center justify-between">
-                <div>
-                  <span className="text-[9px] text-gray-500 block uppercase">IN-HOUSE LABS</span>
-                  <span className="text-cyan-300 font-bold text-[11px] sm:text-xs">SaaS Products</span>
-                </div>
-                <span className="text-emerald-400 text-[10px] font-bold">LIVE</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
       {/* Metrics Banner */}
-      <div className="mt-12 sm:mt-16 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/10 backdrop-blur-md">
+      <div className="mt-16 sm:mt-20 lg:mt-24 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/10 backdrop-blur-md">
         <div className="p-2 sm:p-3 text-center border-r border-white/5">
           <div className="text-xl sm:text-3xl font-extrabold text-white font-mono">99.98%</div>
           <div className="text-[10px] sm:text-[11px] text-gray-400 uppercase font-mono mt-1">
