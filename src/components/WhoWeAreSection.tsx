@@ -15,7 +15,7 @@ export default function WhoWeAreSection() {
       {/* Section Header */}
       <div className="flex flex-col items-start mb-12 sm:mb-16">
         <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight max-w-3xl">
-          Engineered for transparency. Built for real business results.
+          Who we are
         </h2>
         <p className="mt-4 text-sm sm:text-base lg:text-lg text-gray-300 max-w-2xl leading-relaxed">
           Exocross is a software and IT company. We design and build web and mobile

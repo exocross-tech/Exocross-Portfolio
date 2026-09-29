@@ -188,10 +188,9 @@ export default function WhatWeDoSection() {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
         <div>
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-            Our IT Services
+            What we do
           </h2>
           <p className="mt-3 text-sm sm:text-base lg:text-lg text-gray-300 max-w-2xl">
-            From greenfield software to legacy rebuilds, AI systems to cloud cost trimming.
             Every service is tailored around how your business actually runs.
           </p>
         </div>

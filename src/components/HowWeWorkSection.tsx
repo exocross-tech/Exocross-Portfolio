@@ -133,11 +133,10 @@ export default function HowWeWorkSection() {
       {/* Section Header */}
       <div className="flex flex-col items-start mb-12 sm:mb-16">
         <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight max-w-3xl">
-          A disciplined 5-stage framework. Zero guesswork.
+          How we work
         </h2>
         <p className="mt-4 text-sm sm:text-base lg:text-lg text-gray-300 max-w-2xl leading-relaxed">
-          From initial discovery to long-term support, here is how we ensure your software is
-          delivered on time, on budget, and built to last.
+          A disciplined 5-stage framework. Zero guesswork.
         </p>
       </div>
 
@@ -206,7 +205,7 @@ export default function HowWeWorkSection() {
                     </div>
                     <div>
                       <span className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-cyan-400">
-                        PHASE {cur.step} // COLLABORATION
+                        PHASE {cur.step}
                       </span>
                       <h3 className="text-2xl sm:text-3xl font-extrabold text-white">{cur.name}</h3>
                     </div>

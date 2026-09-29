@@ -148,7 +148,7 @@ export default function WhatWeMadeSection() {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
         <div>
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-            Our Products & Client Work
+            What we made
           </h2>
           <p className="mt-3 text-sm sm:text-base lg:text-lg text-gray-300 max-w-2xl">
             Alongside client work, Exocross develops proprietary software products. Each
