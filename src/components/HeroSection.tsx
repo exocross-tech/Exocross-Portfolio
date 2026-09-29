@@ -251,34 +251,34 @@ export default function HeroSection() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-5 lg:p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md shadow-[0_10px_35px_rgba(0,0,0,0.5)]">
           <div className="p-2 sm:p-3 text-center border-r border-white/5">
             <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-mono tracking-tight">
-              99.98%
+              2
             </div>
             <div className="text-[10px] sm:text-xs text-gray-400 uppercase font-mono tracking-wider mt-1.5">
-              Uptime Architecture
+              Months
             </div>
           </div>
           <div className="p-2 sm:p-3 text-center sm:border-r border-white/5">
             <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-cyan-400 font-mono tracking-tight">
-              38%+
+              10+
             </div>
             <div className="text-[10px] sm:text-xs text-gray-400 uppercase font-mono tracking-wider mt-1.5">
-              Cloud Spend Cut
+              Client Projects
             </div>
           </div>
           <div className="p-2 sm:p-3 text-center border-r border-white/5">
             <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-blue-400 font-mono tracking-tight">
-              24h
+              10+
             </div>
             <div className="text-[10px] sm:text-xs text-gray-400 uppercase font-mono tracking-wider mt-1.5">
-              Technical Response
+              Clients
             </div>
           </div>
           <div className="p-2 sm:p-3 text-center">
             <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-mono tracking-tight">
-              100%
+              5
             </div>
             <div className="text-[10px] sm:text-xs text-gray-400 uppercase font-mono tracking-wider mt-1.5">
-              Code & IP Handover
+              Products
             </div>
           </div>
         </div>
