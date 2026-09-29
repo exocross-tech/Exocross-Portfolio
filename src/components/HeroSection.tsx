@@ -95,16 +95,16 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-[92vh] flex flex-col justify-center pt-24 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10 overflow-hidden">
+    <section className="relative min-h-[calc(100vh-1rem)] lg:min-h-screen flex flex-col justify-between pt-24 sm:pt-28 lg:pt-32 pb-6 sm:pb-8 lg:pb-10 px-4 sm:px-6 lg:px-8 max-w-7xl 2xl:max-w-[1440px] mx-auto w-full z-10 overflow-hidden">
       {/* Decorative ambient gradients */}
       <div className="absolute top-1/3 left-0 -translate-y-1/2 w-72 sm:w-96 h-72 sm:h-96 rounded-full bg-blue-600/10 blur-[130px] pointer-events-none" />
       <div className="absolute top-1/2 right-4 sm:right-10 -translate-y-1/2 w-72 sm:w-96 h-72 sm:h-96 rounded-full bg-cyan-500/10 blur-[140px] pointer-events-none" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-center flex-1 my-auto py-4 sm:py-6 w-full">
         {/* Left Column: Core Narrative */}
-        <div className="lg:col-span-6 flex flex-col items-start text-left">
+        <div className="lg:col-span-6 flex flex-col items-start text-left justify-center">
           {/* Main Headline */}
-          <h1 className="text-3xl sm:text-5xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-white leading-[1.15] mb-5">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.08] mb-6">
             We consults, We build,{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-300">
               We renovate, We reduce.
@@ -112,27 +112,27 @@ export default function HeroSection() {
           </h1>
 
           {/* Description */}
-          <p className="text-base sm:text-lg lg:text-xl text-gray-300/90 max-w-2xl font-light leading-relaxed mb-6 sm:mb-8">
+          <p className="text-base sm:text-lg lg:text-xl xl:text-2xl text-gray-300/90 max-w-2xl font-light leading-relaxed mb-8 sm:mb-10">
             Exocross helps companies to utilize technology.
           </p>
 
           {/* Action CTAs */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
             <button
               onClick={() => scrollTo("what-we-made")}
               onMouseEnter={() => sound.playHover()}
               data-cursor="WORK"
-              className="w-full sm:w-auto px-6 sm:px-7 py-3.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-700 hover:from-blue-500 hover:via-cyan-500 hover:to-blue-600 transition-all duration-300 shadow-[0_0_25px_rgba(37,99,235,0.4)] flex items-center justify-center gap-2 border border-cyan-400/40 active:scale-95"
+              className="w-full sm:w-auto px-7 sm:px-8 py-4 rounded-xl font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-700 hover:from-blue-500 hover:via-cyan-500 hover:to-blue-600 transition-all duration-300 shadow-[0_0_25px_rgba(37,99,235,0.4)] hover:shadow-[0_0_35px_rgba(6,182,212,0.6)] flex items-center justify-center gap-2.5 border border-cyan-400/40 active:scale-95"
             >
               <span>Explore What We Made</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
             <button
               onClick={() => scrollTo("get-in-touch")}
               onMouseEnter={() => sound.playHover()}
               data-cursor="DISCUSS"
-              className="w-full sm:w-auto px-6 sm:px-7 py-3.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider text-gray-300 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-500/40 transition-all duration-300 backdrop-blur-md flex items-center justify-center gap-2 active:scale-95"
+              className="w-full sm:w-auto px-7 sm:px-8 py-4 rounded-xl font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-300 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-500/40 transition-all duration-300 backdrop-blur-md flex items-center justify-center gap-2 active:scale-95"
             >
               <span>Consult Our Team</span>
             </button>
@@ -140,7 +140,7 @@ export default function HeroSection() {
         </div>
 
         {/* Right Column: Hero Video Showcase (1.mp4) & Interactive Frame */}
-        <div className="lg:col-span-6 w-full">
+        <div className="lg:col-span-6 w-full flex items-center justify-center">
           <div
             onMouseEnter={() => sound.playHover()}
             className="relative rounded-2xl sm:rounded-3xl p-1.5 sm:p-2 glass-panel-glow border border-cyan-500/30 shadow-[0_15px_45px_rgba(0,0,0,0.7)] group hover:border-cyan-400/60 transition-all duration-500"
@@ -246,30 +246,40 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Metrics Banner */}
-      <div className="mt-16 sm:mt-20 lg:mt-24 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/10 backdrop-blur-md">
-        <div className="p-2 sm:p-3 text-center border-r border-white/5">
-          <div className="text-xl sm:text-3xl font-extrabold text-white font-mono">99.98%</div>
-          <div className="text-[10px] sm:text-[11px] text-gray-400 uppercase font-mono mt-1">
-            Uptime Architecture
+      {/* Metrics Banner (Anchored at the bottom of the hero viewport) */}
+      <div className="w-full mt-auto pt-6 sm:pt-8 pb-2">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-5 lg:p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md shadow-[0_10px_35px_rgba(0,0,0,0.5)]">
+          <div className="p-2 sm:p-3 text-center border-r border-white/5">
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-mono tracking-tight">
+              99.98%
+            </div>
+            <div className="text-[10px] sm:text-xs text-gray-400 uppercase font-mono tracking-wider mt-1.5">
+              Uptime Architecture
+            </div>
           </div>
-        </div>
-        <div className="p-2 sm:p-3 text-center sm:border-r border-white/5">
-          <div className="text-xl sm:text-3xl font-extrabold text-cyan-400 font-mono">38%+</div>
-          <div className="text-[10px] sm:text-[11px] text-gray-400 uppercase font-mono mt-1">
-            Cloud Spend Cut
+          <div className="p-2 sm:p-3 text-center sm:border-r border-white/5">
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-cyan-400 font-mono tracking-tight">
+              38%+
+            </div>
+            <div className="text-[10px] sm:text-xs text-gray-400 uppercase font-mono tracking-wider mt-1.5">
+              Cloud Spend Cut
+            </div>
           </div>
-        </div>
-        <div className="p-2 sm:p-3 text-center border-r border-white/5">
-          <div className="text-xl sm:text-3xl font-extrabold text-blue-400 font-mono">24h</div>
-          <div className="text-[10px] sm:text-[11px] text-gray-400 uppercase font-mono mt-1">
-            Technical Response
+          <div className="p-2 sm:p-3 text-center border-r border-white/5">
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-blue-400 font-mono tracking-tight">
+              24h
+            </div>
+            <div className="text-[10px] sm:text-xs text-gray-400 uppercase font-mono tracking-wider mt-1.5">
+              Technical Response
+            </div>
           </div>
-        </div>
-        <div className="p-2 sm:p-3 text-center">
-          <div className="text-xl sm:text-3xl font-extrabold text-white font-mono">100%</div>
-          <div className="text-[10px] sm:text-[11px] text-gray-400 uppercase font-mono mt-1">
-            Code & IP Handover
+          <div className="p-2 sm:p-3 text-center">
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-mono tracking-tight">
+              100%
+            </div>
+            <div className="text-[10px] sm:text-xs text-gray-400 uppercase font-mono tracking-wider mt-1.5">
+              Code & IP Handover
+            </div>
           </div>
         </div>
       </div>
