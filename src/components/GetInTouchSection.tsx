@@ -86,9 +86,6 @@ export default function GetInTouchSection() {
     >
       {/* Section Header */}
       <div className="flex flex-col items-start mb-12 sm:mb-16">
-        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-mono text-xs tracking-widest uppercase mb-4">
-          <span>06 // GET IN TOUCH</span>
-        </div>
         <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight max-w-3xl">
           Tell us what you are working on, or what is not working.
         </h2>

@@ -59,12 +59,12 @@ export default function Footer() {
             </h4>
             <ul className="grid grid-cols-2 gap-2.5 text-sm text-gray-400 font-mono">
               {[
-                { label: "01 // Who We Are", id: "who-we-are" },
-                { label: "02 // What We Do", id: "what-we-do" },
-                { label: "03 // What We Made", id: "what-we-made" },
-                { label: "04 // How We Work", id: "how-we-work" },
-                { label: "05 // What's New", id: "whats-new" },
-                { label: "06 // Get In Touch", id: "get-in-touch" },
+                { label: "Who We Are", id: "who-we-are" },
+                { label: "What We Do", id: "what-we-do" },
+                { label: "What We Made", id: "what-we-made" },
+                { label: "How We Work", id: "how-we-work" },
+                { label: "What's New", id: "whats-new" },
+                { label: "Get In Touch", id: "get-in-touch" },
               ].map((item) => (
                 <li key={item.id}>
                   <button

@@ -14,9 +14,6 @@ export default function WhoWeAreSection() {
     >
       {/* Section Header */}
       <div className="flex flex-col items-start mb-12 sm:mb-16">
-        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 font-mono text-xs tracking-widest uppercase mb-4">
-          <span>01 // WHO WE ARE</span>
-        </div>
         <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight max-w-3xl">
           Engineered for transparency. Built for real business results.
         </h2>
