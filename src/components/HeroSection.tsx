@@ -18,6 +18,18 @@ export default function HeroSection() {
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  const handleVideoMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 6;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -6;
+    setTilt({ x, y });
+  };
+
+  const handleVideoMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+  };
 
   useEffect(() => {
     const video = videoRef.current;
@@ -105,8 +117,8 @@ export default function HeroSection() {
         <div className="lg:col-span-6 flex flex-col items-start text-left justify-center">
           {/* Main Headline */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.08] mb-6">
-            We consults, We build,{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-300">
+            We consult, We build,{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 via-40% to-indigo-300 animate-gradient-flow">
               We renovate, We reduce.
             </span>
           </h1>
@@ -122,28 +134,37 @@ export default function HeroSection() {
               onClick={() => scrollTo("what-we-made")}
               onMouseEnter={() => sound.playHover()}
               data-cursor="WORK"
-              className="w-full sm:w-auto px-7 sm:px-8 py-4 rounded-xl font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-700 hover:from-blue-500 hover:via-cyan-500 hover:to-blue-600 transition-all duration-300 shadow-[0_0_25px_rgba(37,99,235,0.4)] hover:shadow-[0_0_35px_rgba(6,182,212,0.6)] flex items-center justify-center gap-2.5 border border-cyan-400/40 active:scale-95"
+              className="relative group overflow-hidden w-full sm:w-auto px-7 sm:px-8 py-4 rounded-xl font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-700 hover:from-blue-500 hover:via-cyan-500 hover:to-blue-600 transition-all duration-300 shadow-[0_0_25px_rgba(37,99,235,0.4)] hover:shadow-[0_0_35px_rgba(6,182,212,0.6)] flex items-center justify-center gap-2.5 border border-cyan-400/40 active:scale-95"
             >
-              <span>Explore What We Made</span>
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none" />
+              <span className="relative z-10 flex items-center gap-2.5">
+                <span>Explore What We Made</span>
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-200" />
+              </span>
             </button>
 
             <button
               onClick={() => scrollTo("get-in-touch")}
               onMouseEnter={() => sound.playHover()}
               data-cursor="DISCUSS"
-              className="w-full sm:w-auto px-7 sm:px-8 py-4 rounded-xl font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-300 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-500/40 transition-all duration-300 backdrop-blur-md flex items-center justify-center gap-2 active:scale-95"
+              className="relative group overflow-hidden w-full sm:w-auto px-7 sm:px-8 py-4 rounded-xl font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-300 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-500/40 transition-all duration-300 backdrop-blur-md flex items-center justify-center gap-2 active:scale-95 shadow-[0_0_20px_rgba(0,0,0,0.2)]"
             >
-              <span>Consult Our Team</span>
+              <span className="relative z-10">Consult Our Team</span>
             </button>
           </div>
         </div>
 
         {/* Right Column: Hero Video Showcase (1.mp4) & Interactive Frame */}
-        <div className="lg:col-span-6 w-full flex items-center justify-center">
+        <div className="lg:col-span-6 w-full flex items-center justify-center [perspective:1000px]">
           <div
+            onMouseMove={handleVideoMouseMove}
+            onMouseLeave={handleVideoMouseLeave}
             onMouseEnter={() => sound.playHover()}
-            className="relative rounded-2xl sm:rounded-3xl p-1.5 sm:p-2 glass-panel-glow border border-cyan-500/30 shadow-[0_15px_45px_rgba(0,0,0,0.7)] group hover:border-cyan-400/60 transition-all duration-500"
+            style={{
+              transform: `rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
+              transition: "transform 0.15s ease-out",
+            }}
+            className="relative w-full rounded-2xl sm:rounded-3xl p-1.5 sm:p-2 glass-panel-glow border border-cyan-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.7)] group hover:border-cyan-400/60 transition-all duration-300"
           >
             {/* Ambient Video Glow Backdrop */}
             <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-blue-600/30 via-cyan-400/20 to-indigo-600/30 blur-xl opacity-60 group-hover:opacity-100 transition duration-700 pointer-events-none" />
@@ -249,7 +270,16 @@ export default function HeroSection() {
       {/* Metrics Banner (Anchored at the bottom of the hero viewport) */}
       <div className="w-full mt-auto pt-6 sm:pt-8 pb-2">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-5 lg:p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md shadow-[0_10px_35px_rgba(0,0,0,0.5)]">
-          <div className="p-2 sm:p-3 text-center border-r border-white/5">
+          <div className="p-2 sm:p-3 text-center border-r border-white/5 flex flex-col items-center justify-center">
+            <div className="flex items-center gap-1.5 mb-1.5">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+              </span>
+              <span className="text-[9px] font-mono tracking-widest text-emerald-400/90 font-medium uppercase">
+                RAPID SPRINT
+              </span>
+            </div>
             <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-mono tracking-tight">
               2
             </div>
@@ -257,7 +287,16 @@ export default function HeroSection() {
               Months
             </div>
           </div>
-          <div className="p-2 sm:p-3 text-center sm:border-r border-white/5">
+          <div className="p-2 sm:p-3 text-center sm:border-r border-white/5 flex flex-col items-center justify-center">
+            <div className="flex items-center gap-1.5 mb-1.5">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cyan-400" />
+              </span>
+              <span className="text-[9px] font-mono tracking-widest text-cyan-400/90 font-medium uppercase">
+                DELIVERED
+              </span>
+            </div>
             <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-cyan-400 font-mono tracking-tight">
               10+
             </div>
@@ -265,7 +304,16 @@ export default function HeroSection() {
               Client Projects
             </div>
           </div>
-          <div className="p-2 sm:p-3 text-center border-r border-white/5">
+          <div className="p-2 sm:p-3 text-center border-r border-white/5 flex flex-col items-center justify-center">
+            <div className="flex items-center gap-1.5 mb-1.5">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-400" />
+              </span>
+              <span className="text-[9px] font-mono tracking-widest text-blue-400/90 font-medium uppercase">
+                PARTNERS
+              </span>
+            </div>
             <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-blue-400 font-mono tracking-tight">
               10+
             </div>
@@ -273,7 +321,16 @@ export default function HeroSection() {
               Clients
             </div>
           </div>
-          <div className="p-2 sm:p-3 text-center">
+          <div className="p-2 sm:p-3 text-center flex flex-col items-center justify-center">
+            <div className="flex items-center gap-1.5 mb-1.5">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-indigo-400" />
+              </span>
+              <span className="text-[9px] font-mono tracking-widest text-indigo-400/90 font-medium uppercase">
+                IN-HOUSE LABS
+              </span>
+            </div>
             <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-mono tracking-tight">
               5
             </div>
