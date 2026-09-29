@@ -44,38 +44,127 @@ export default function ThreeCanvas({ currentSection = 0 }: ThreeCanvasProps) {
     renderer.toneMappingExposure = 1.2;
     container.appendChild(renderer.domElement);
 
-    // 1. Central Core: Morphing Wireframe Icosahedron & Torus Knot
+    // 1. Central Core: The Data Constellation Matrix
     const coreGroup = new THREE.Group();
     scene.add(coreGroup);
 
-    // Outer wireframe icosahedron
-    const icoGeo = new THREE.IcosahedronGeometry(5.5, 2);
-    const icoMat = new THREE.MeshStandardMaterial({
-      color: 0x3b82f6,
-      wireframe: true,
+    // 1a. Outer Geometric Constellation (Icosahedron Framework)
+    const outerConstellationGroup = new THREE.Group();
+    coreGroup.add(outerConstellationGroup);
+
+    const outerIcoGeo = new THREE.IcosahedronGeometry(5.2, 0);
+    const outerEdgesGeo = new THREE.EdgesGeometry(outerIcoGeo);
+    const outerLineMat = new THREE.LineBasicMaterial({
+      color: 0x38bdf8,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.65,
+    });
+    const outerWireLines = new THREE.LineSegments(outerEdgesGeo, outerLineMat);
+    outerConstellationGroup.add(outerWireLines);
+
+    // Subtle holographic translucent facet shading
+    const outerFacetsMat = new THREE.MeshStandardMaterial({
+      color: 0x0284c7,
+      roughness: 0.1,
+      metalness: 0.8,
+      transparent: true,
+      opacity: 0.08,
+      side: THREE.DoubleSide,
+    });
+    const outerFacetsMesh = new THREE.Mesh(outerIcoGeo, outerFacetsMat);
+    outerConstellationGroup.add(outerFacetsMesh);
+
+    // Pulsing vertex nodes (glowing data spheres at each vertex)
+    const nodeGeo = new THREE.SphereGeometry(0.2, 16, 16);
+    const nodeMat = new THREE.MeshStandardMaterial({
+      color: 0x38bdf8,
+      emissive: 0x06b6d4,
+      emissiveIntensity: 1.2,
+      roughness: 0.1,
+      metalness: 0.9,
+    });
+
+    const posAttr = outerIcoGeo.attributes.position;
+    const uniqueVertices: THREE.Vector3[] = [];
+    for (let i = 0; i < posAttr.count; i++) {
+      const v = new THREE.Vector3().fromBufferAttribute(posAttr, i);
+      if (!uniqueVertices.some((u) => u.distanceTo(v) < 0.01)) {
+        uniqueVertices.push(v);
+        const nodeMesh = new THREE.Mesh(nodeGeo, nodeMat);
+        nodeMesh.position.copy(v);
+        outerConstellationGroup.add(nodeMesh);
+      }
+    }
+
+    // 1b. Inner Counter-Rotating Dual Core (Octahedron & Quantum Crystal)
+    const innerConstellationGroup = new THREE.Group();
+    coreGroup.add(innerConstellationGroup);
+
+    const innerGeo = new THREE.OctahedronGeometry(2.6, 0);
+    const innerEdgesGeo = new THREE.EdgesGeometry(innerGeo);
+    const innerLineMat = new THREE.LineBasicMaterial({
+      color: 0x818cf8,
+      transparent: true,
+      opacity: 0.75,
+    });
+    const innerWireLines = new THREE.LineSegments(innerEdgesGeo, innerLineMat);
+    innerConstellationGroup.add(innerWireLines);
+
+    // Central glowing quantum power crystal
+    const innerCoreGeo = new THREE.DodecahedronGeometry(1.4, 0);
+    const innerCoreMat = new THREE.MeshStandardMaterial({
+      color: 0x0369a1,
+      emissive: 0x0ea5e9,
+      emissiveIntensity: 0.8,
+      roughness: 0.2,
+      metalness: 0.85,
+    });
+    const innerCoreMesh = new THREE.Mesh(innerCoreGeo, innerCoreMat);
+    innerConstellationGroup.add(innerCoreMesh);
+
+    // Inner vertex nodes
+    const innerPosAttr = innerGeo.attributes.position;
+    const innerUniqueVertices: THREE.Vector3[] = [];
+    for (let i = 0; i < innerPosAttr.count; i++) {
+      const v = new THREE.Vector3().fromBufferAttribute(innerPosAttr, i);
+      if (!innerUniqueVertices.some((u) => u.distanceTo(v) < 0.01)) {
+        innerUniqueVertices.push(v);
+        const innerNode = new THREE.Mesh(nodeGeo, nodeMat);
+        innerNode.position.copy(v);
+        innerNode.scale.setScalar(0.7);
+        innerConstellationGroup.add(innerNode);
+      }
+    }
+
+    // 1c. Orbiting Micro Data Cubes (Cloud Data Tokens)
+    const cubeGeo = new THREE.BoxGeometry(0.3, 0.3, 0.3);
+    const cubeMat = new THREE.MeshStandardMaterial({
+      color: 0x38bdf8,
+      emissive: 0x0284c7,
+      emissiveIntensity: 0.7,
       roughness: 0.2,
       metalness: 0.9,
     });
-    const icoMesh = new THREE.Mesh(icoGeo, icoMat);
-    coreGroup.add(icoMesh);
+    const orbitingCubes: {
+      mesh: THREE.Mesh;
+      radius: number;
+      speed: number;
+      offset: number;
+      tiltAngle: number;
+    }[] = [];
 
-    // Inner glowing Torus Knot
-    const knotGeo = new THREE.TorusKnotGeometry(2.8, 0.6, 128, 32);
-    const knotMat = new THREE.MeshStandardMaterial({
-      color: 0x06b6d4,
-      roughness: 0.15,
-      metalness: 0.85,
-      emissive: 0x1e3a8a,
-      emissiveIntensity: 0.4,
-      wireframe: false,
-    });
-    const knotMesh = new THREE.Mesh(knotGeo, knotMat);
-    coreGroup.add(knotMesh);
+    for (let i = 0; i < 14; i++) {
+      const mesh = new THREE.Mesh(cubeGeo, cubeMat);
+      const radius = 6.2 + (i % 4) * 0.7;
+      const speed = 0.35 + (i % 3) * 0.12;
+      const offset = (i / 14) * Math.PI * 2;
+      const tiltAngle = (i % 2 === 0 ? 1 : -1) * (0.3 + (i % 5) * 0.12);
+      orbitingCubes.push({ mesh, radius, speed, offset, tiltAngle });
+      coreGroup.add(mesh);
+    }
 
-    // Concentric orbiting cyber rings
-    const ring1Geo = new THREE.RingGeometry(8, 8.12, 64);
+    // 1d. Concentric Orbiting Cyber Rings
+    const ring1Geo = new THREE.RingGeometry(8.2, 8.28, 64);
     const ring1Mat = new THREE.MeshBasicMaterial({
       color: 0x38bdf8,
       side: THREE.DoubleSide,
@@ -86,7 +175,7 @@ export default function ThreeCanvas({ currentSection = 0 }: ThreeCanvasProps) {
     ring1.rotation.x = Math.PI / 3;
     coreGroup.add(ring1);
 
-    const ring2Geo = new THREE.RingGeometry(9.6, 9.72, 64);
+    const ring2Geo = new THREE.RingGeometry(9.8, 9.88, 64);
     const ring2Mat = new THREE.MeshBasicMaterial({
       color: 0x818cf8,
       side: THREE.DoubleSide,
@@ -273,13 +362,35 @@ export default function ThreeCanvas({ currentSection = 0 }: ThreeCanvasProps) {
       const newScale = currentScale + (targetScale - currentScale) * 0.04;
       coreGroup.scale.set(newScale, newScale, newScale);
 
-      // Core rotation with mouse influence
-      coreGroup.rotation.y = elapsedTime * 0.25 + mouse.x * 0.6;
-      coreGroup.rotation.x = elapsedTime * 0.15 + mouse.y * 0.4;
+      // Core constellation rotation with mouse influence
+      coreGroup.rotation.y = elapsedTime * 0.18 + mouse.x * 0.5;
+      coreGroup.rotation.x = elapsedTime * 0.1 + mouse.y * 0.35;
 
-      // Inner Knot counter-rotation
-      knotMesh.rotation.y = -elapsedTime * 0.45;
-      knotMesh.rotation.z = elapsedTime * 0.3;
+      // Outer constellation gentle secondary spin
+      outerConstellationGroup.rotation.y = elapsedTime * 0.08;
+      outerConstellationGroup.rotation.z = -elapsedTime * 0.05;
+
+      // Inner dual core counter-rotation
+      innerConstellationGroup.rotation.y = -elapsedTime * 0.35;
+      innerConstellationGroup.rotation.z = elapsedTime * 0.25;
+
+      // Inner core breathing pulsation
+      const corePulse = 1 + Math.sin(elapsedTime * 2.5) * 0.08;
+      innerCoreMesh.scale.set(corePulse, corePulse, corePulse);
+
+      // Node dynamic emissive pulse
+      nodeMat.emissiveIntensity = 1.0 + Math.sin(elapsedTime * 3) * 0.4;
+      innerCoreMat.emissiveIntensity = 0.7 + Math.cos(elapsedTime * 2.2) * 0.3;
+
+      // Orbiting micro-cubes update
+      orbitingCubes.forEach((cube) => {
+        const angle = elapsedTime * cube.speed + cube.offset;
+        cube.mesh.position.x = Math.cos(angle) * cube.radius;
+        cube.mesh.position.y = Math.sin(angle) * Math.sin(cube.tiltAngle) * cube.radius * 0.5;
+        cube.mesh.position.z = Math.sin(angle) * Math.cos(cube.tiltAngle) * cube.radius;
+        cube.mesh.rotation.x += 0.02;
+        cube.mesh.rotation.y += 0.03;
+      });
 
       // Outer rings orbit
       ring1.rotation.z = elapsedTime * 0.15;
@@ -316,10 +427,19 @@ export default function ThreeCanvas({ currentSection = 0 }: ThreeCanvasProps) {
       }
 
       // Dispose Three.js objects
-      icoGeo.dispose();
-      icoMat.dispose();
-      knotGeo.dispose();
-      knotMat.dispose();
+      outerIcoGeo.dispose();
+      outerEdgesGeo.dispose();
+      outerLineMat.dispose();
+      outerFacetsMat.dispose();
+      nodeGeo.dispose();
+      nodeMat.dispose();
+      innerGeo.dispose();
+      innerEdgesGeo.dispose();
+      innerLineMat.dispose();
+      innerCoreGeo.dispose();
+      innerCoreMat.dispose();
+      cubeGeo.dispose();
+      cubeMat.dispose();
       ring1Geo.dispose();
       ring1Mat.dispose();
       ring2Geo.dispose();
