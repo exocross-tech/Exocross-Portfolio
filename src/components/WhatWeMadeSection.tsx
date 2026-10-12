@@ -1,18 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { sound } from "@/lib/sound";
-import {
-  ExternalLink,
-  Layers,
-  Sparkles,
-  TrendingUp,
-  Cpu,
-  ShieldCheck,
-  CheckCircle,
-  Activity,
-  Zap,
-} from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 export interface ProjectItem {
   id: string;
@@ -25,7 +16,7 @@ export interface ProjectItem {
   solution: string;
   impactMetrics: { label: string; value: string }[];
   tags: string[];
-  gradient: string;
+  previewImage?: string;
 }
 
 export const projectsData: ProjectItem[] = [
@@ -47,7 +38,7 @@ export const projectsData: ProjectItem[] = [
       { label: "Payback Period", value: "< 14 Days" },
     ],
     tags: ["AWS", "GCP", "Kubernetes", "Next.js", "Python", "FinOps"],
-    gradient: "from-blue-600/30 via-cyan-600/20 to-transparent",
+    previewImage: "/exopulse-preview.jpg",
   },
   {
     id: "synapse-ai",
@@ -67,7 +58,7 @@ export const projectsData: ProjectItem[] = [
       { label: "Manual Hours Saved", value: "12,000+" },
     ],
     tags: ["OpenAI", "LangChain", "Vector DB", "FastAPI", "React"],
-    gradient: "from-purple-600/30 via-indigo-600/20 to-transparent",
+    previewImage: "/synapse-preview.jpg",
   },
   {
     id: "omnihealth",
@@ -87,7 +78,6 @@ export const projectsData: ProjectItem[] = [
       { label: "Latency", value: "< 45ms" },
     ],
     tags: ["React Native", "Next.js", "WebRTC", "Node.js", "HIPAA"],
-    gradient: "from-emerald-600/30 via-teal-600/20 to-transparent",
   },
   {
     id: "apex-fintech",
@@ -107,7 +97,6 @@ export const projectsData: ProjectItem[] = [
       { label: "Memory Footprint", value: "-62%" },
     ],
     tags: ["WebGL", "Three.js", "WebSockets", "Rust Core", "TypeScript"],
-    gradient: "from-amber-600/30 via-orange-600/20 to-transparent",
   },
   {
     id: "heritage-revamp",
@@ -127,7 +116,6 @@ export const projectsData: ProjectItem[] = [
       { label: "Lighthouse Score", value: "99 / 100" },
     ],
     tags: ["Next.js", "Headless", "Edge Cache", "Stripe", "Tailwind"],
-    gradient: "from-cyan-600/30 via-blue-600/20 to-transparent",
   },
 ];
 
@@ -142,22 +130,25 @@ export default function WhatWeMadeSection() {
   return (
     <section
       id="what-we-made"
-      className="relative py-16 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10"
+      className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10 border-t border-[#E5E7EB]"
     >
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 sm:mb-16 gap-6">
         <div>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          <span className="text-xs font-mono text-[#245BDB] uppercase tracking-wider mb-2 block font-semibold">
+            03 // PRODUCTS & CASE STUDIES
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#161B26] tracking-tight leading-tight">
             What we made
           </h2>
-          <p className="mt-3 text-sm sm:text-base lg:text-lg text-gray-300 max-w-2xl">
+          <p className="mt-3 text-base sm:text-lg text-[#515B6B] max-w-2xl">
             Alongside client work, Exocross develops proprietary software products. Each
             solution starts from a real problem, engineered to the highest production standards.
           </p>
         </div>
 
         {/* Filter Switcher */}
-        <div className="flex items-center gap-1.5 sm:gap-2 p-1.5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md overflow-x-auto max-w-full">
+        <div className="flex items-center gap-1.5 p-1 rounded-lg border border-[#E5E7EB] bg-[#F7F8FA] overflow-x-auto max-w-full">
           {[
             { id: "all", label: "All Work" },
             { id: "in-house", label: "Our In-House Products" },
@@ -170,10 +161,10 @@ export default function WhatWeMadeSection() {
                 setFilter(tab.id as typeof filter);
               }}
               data-cursor="FILTER"
-              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-mono tracking-wider transition-all duration-200 shrink-0 ${
+              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors shrink-0 ${
                 filter === tab.id
-                  ? "bg-cyan-500 text-black font-bold shadow-[0_0_15px_rgba(6,182,212,0.4)]"
-                  : "text-gray-400 hover:text-white hover:bg-white/[0.04]"
+                  ? "bg-white text-[#161B26] font-semibold shadow-xs"
+                  : "text-[#515B6B] hover:text-[#161B26]"
               }`}
             >
               {tab.label}
@@ -182,8 +173,8 @@ export default function WhatWeMadeSection() {
         </div>
       </div>
 
-      {/* Featured Projects Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {/* Structured Editorial Showcase Layout */}
+      <div className="space-y-8">
         {filteredProjects.map((project, idx) => (
           <div
             key={project.id}
@@ -193,83 +184,89 @@ export default function WhatWeMadeSection() {
             }}
             onMouseEnter={() => sound.playHover()}
             data-cursor="CASE STUDY"
-            className="group relative rounded-3xl glass-card overflow-hidden border border-white/10 hover:border-cyan-400/50 cursor-pointer flex flex-col justify-between transition-all duration-300 shadow-[0_15px_40px_rgba(0,0,0,0.5)]"
+            className="group rounded-2xl bg-white border border-[#E5E7EB] hover:border-[#D1D5DB] hover:shadow-[0_8px_24px_-4px_rgba(15,23,42,0.08)] cursor-pointer p-6 sm:p-10 transition-all"
           >
-            {/* Ambient project top banner */}
-            <div
-              className={`h-44 sm:h-52 w-full p-6 flex flex-col justify-between relative bg-gradient-to-br ${project.gradient} border-b border-white/10`}
-            >
-              <div className="flex items-center justify-between z-10">
-                <span
-                  className={`px-3 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase font-semibold ${
-                    project.type === "in-house"
-                      ? "bg-cyan-400/20 text-cyan-300 border border-cyan-400/40"
-                      : "bg-blue-400/20 text-blue-300 border border-blue-400/40"
-                  }`}
-                >
-                  {project.type === "in-house" ? "★ Exocross Product" : "● Client System"}
-                </span>
-
-                <span className="text-xs font-mono text-gray-400">0{idx + 1}</span>
-              </div>
-
-              {/* Title & Tagline in Banner */}
-              <div className="z-10">
-                <span className="text-[11px] font-mono text-cyan-300 uppercase tracking-wider block mb-1">
-                  {project.category}
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white group-hover:text-cyan-300 transition-colors">
-                  {project.title}
-                </h3>
-              </div>
-
-              {/* Background Cyber Grid */}
-              <div className="absolute inset-0 bg-cyber-grid opacity-30" />
-            </div>
-
-            {/* Bottom Content Area */}
-            <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
-              <div>
-                <p className="text-sm sm:text-base text-gray-300 font-medium mb-3">
-                  {project.tagline}
-                </p>
-                <p className="text-xs sm:text-sm text-gray-400 leading-relaxed mb-6">
-                  {project.description}
-                </p>
-              </div>
-
-              <div>
-                {/* Metric Badges */}
-                <div className="grid grid-cols-3 gap-3 mb-6 p-3.5 rounded-2xl bg-black/40 border border-white/5">
-                  {project.impactMetrics.map((metric, i) => (
-                    <div key={i} className="text-center">
-                      <div className="text-base sm:text-lg font-mono font-bold text-white group-hover:text-cyan-400 transition-colors">
-                        {metric.value}
-                      </div>
-                      <div className="text-[10px] font-mono text-gray-500 uppercase">
-                        {metric.label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Tags and CTA */}
-                <div className="flex items-center justify-between pt-4 border-t border-white/5">
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-0.5 rounded-md bg-white/[0.04] text-[10px] font-mono text-gray-400"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* Left Column: Project Overview */}
+              <div className="lg:col-span-7 flex flex-col justify-between h-full">
+                <div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <span
+                      className={`px-2.5 py-0.5 rounded text-[11px] font-mono uppercase font-semibold ${
+                        project.type === "in-house"
+                          ? "bg-[#F0F5FF] text-[#245BDB] border border-[#E5E7EB]"
+                          : "bg-[#F7F8FA] text-[#515B6B] border border-[#E5E7EB]"
+                      }`}
+                    >
+                      {project.type === "in-house" ? "Exocross Product" : "Client System"}
+                    </span>
+                    <span className="text-xs font-mono text-[#737D8C]">
+                      0{idx + 1} // {project.category}
+                    </span>
                   </div>
 
-                  <span className="inline-flex items-center gap-1.5 text-xs font-mono text-cyan-400 group-hover:underline">
-                    <span>Inspect System</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
+                  <h3 className="text-2xl sm:text-3xl font-bold text-[#161B26] group-hover:text-[#245BDB] transition-colors mb-2">
+                    {project.title}
+                  </h3>
+
+                  <p className="text-sm sm:text-base font-medium text-[#245BDB] mb-3">
+                    {project.tagline}
+                  </p>
+
+                  <p className="text-sm text-[#515B6B] leading-relaxed mb-6">
+                    {project.description}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-[#E5E7EB]/60">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-2.5 py-0.5 rounded text-xs font-mono bg-[#F7F8FA] text-[#515B6B]"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right Column: Visual Interface Preview or Measured Outcomes */}
+              <div className="lg:col-span-5 flex flex-col justify-between h-full bg-[#F7F8FA] rounded-xl border border-[#E5E7EB] overflow-hidden p-5">
+                {project.previewImage ? (
+                  <div className="mb-4">
+                    <div className="relative w-full aspect-16/10 rounded-lg overflow-hidden border border-[#E5E7EB] shadow-xs bg-white">
+                      <Image
+                        src={project.previewImage}
+                        alt={project.title}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 400px"
+                        className="object-cover group-hover:scale-102 transition-transform duration-300"
+                      />
+                    </div>
+                  </div>
+                ) : null}
+
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#737D8C] block mb-3 font-semibold">
+                    MEASURED OUTCOMES
                   </span>
+                  <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4">
+                    {project.impactMetrics.map((metric, i) => (
+                      <div key={i} className="flex flex-col">
+                        <span className="text-lg sm:text-xl font-bold font-mono text-[#161B26] group-hover:text-[#245BDB] transition-colors">
+                          {metric.value}
+                        </span>
+                        <span className="text-[10px] text-[#737D8C] mt-0.5 leading-tight">
+                          {metric.label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-[#E5E7EB] flex items-center justify-between text-xs font-medium text-[#245BDB]">
+                  <span>Inspect System Case Study</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
                 </div>
               </div>
             </div>
@@ -279,68 +276,76 @@ export default function WhatWeMadeSection() {
 
       {/* Interactive Project Deep-Dive Modal */}
       {selectedProject && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/85 backdrop-blur-2xl animate-in fade-in duration-200">
-          <div className="relative max-w-2xl w-full p-6 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel-glow border border-cyan-500/40 shadow-[0_25px_70px_rgba(0,0,0,0.9)] max-h-[88vh] overflow-y-auto">
-            {/* Close Button */}
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#161B26]/40 backdrop-blur-xs animate-fade-in duration-150">
+          <div className="relative max-w-2xl w-full p-6 sm:p-8 rounded-xl bg-white border border-[#E5E7EB] shadow-[0_20px_48px_rgba(15,23,42,0.16)] max-h-[88vh] overflow-y-auto animate-fade-in-up">
             <button
               onClick={() => {
                 sound.playClick();
                 setSelectedProject(null);
               }}
+              aria-label="Close dialog"
               data-cursor="CLOSE"
-              className="absolute top-4 sm:top-6 right-4 sm:right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 hover:text-white transition-colors"
+              className="absolute top-5 right-5 p-1.5 rounded-lg text-[#515B6B] hover:text-[#161B26] hover:bg-[#F7F8FA] transition-colors"
             >
               ✕
             </button>
 
-            {/* Modal Header */}
-            <div className="mb-5 sm:mb-6 pr-8">
-              <span className="px-2.5 sm:px-3 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 inline-block mb-2 sm:mb-3">
+            <div className="mb-6 pr-8">
+              <span className="px-2.5 py-0.5 rounded text-[11px] font-mono tracking-wider uppercase bg-[#F0F5FF] text-[#245BDB] border border-[#E5E7EB] font-semibold inline-block mb-3">
                 {selectedProject.type === "in-house"
-                  ? "★ Exocross In-House Product"
-                  : "● Custom Client Architecture"}
+                  ? "Exocross In-House Product"
+                  : "Custom Client Architecture"}
               </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white">{selectedProject.title}</h3>
-              <p className="text-cyan-400 font-mono text-xs sm:text-sm mt-1">{selectedProject.tagline}</p>
+              <h3 className="text-2xl sm:text-3xl font-bold text-[#161B26]">{selectedProject.title}</h3>
+              <p className="text-[#245BDB] text-sm mt-1">{selectedProject.tagline}</p>
             </div>
 
-            {/* Metrics Highlight */}
-            <div className="grid grid-cols-3 gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/[0.03] border border-white/10 mb-5 sm:mb-6">
+            {selectedProject.previewImage ? (
+              <div className="relative w-full aspect-16/9 rounded-lg overflow-hidden border border-[#E5E7EB] mb-6">
+                <Image
+                  src={selectedProject.previewImage}
+                  alt={selectedProject.title}
+                  fill
+                  sizes="600px"
+                  className="object-cover"
+                />
+              </div>
+            ) : null}
+
+            <div className="grid grid-cols-3 gap-3 p-4 rounded-lg bg-[#F7F8FA] border border-[#E5E7EB] mb-6">
               {selectedProject.impactMetrics.map((m, i) => (
                 <div key={i} className="text-center">
-                  <div className="text-base sm:text-xl font-bold font-mono text-cyan-300">{m.value}</div>
-                  <div className="text-[9px] sm:text-[11px] font-mono text-gray-400 uppercase">{m.label}</div>
+                  <div className="text-lg sm:text-xl font-bold font-mono text-[#161B26]">{m.value}</div>
+                  <div className="text-[10px] font-mono text-[#737D8C] uppercase mt-0.5">{m.label}</div>
                 </div>
               ))}
             </div>
 
-            {/* Problem & Solution Breakdown */}
-            <div className="space-y-3 sm:space-y-4 mb-5 sm:mb-6 text-xs sm:text-sm text-gray-300 leading-relaxed font-sans">
-              <div className="p-3.5 sm:p-4 rounded-xl bg-black/40 border border-white/5">
-                <span className="text-[10px] sm:text-xs font-mono uppercase text-red-400 font-bold block mb-1">
+            <div className="space-y-4 mb-6 text-sm text-[#515B6B] leading-relaxed">
+              <div className="p-4 rounded-lg bg-[#F7F8FA] border border-[#E5E7EB]">
+                <span className="text-xs font-mono uppercase text-[#161B26] font-bold block mb-1">
                   THE CHALLENGE
                 </span>
                 <p>{selectedProject.challenge}</p>
               </div>
 
-              <div className="p-3.5 sm:p-4 rounded-xl bg-black/40 border border-white/5">
-                <span className="text-[10px] sm:text-xs font-mono uppercase text-emerald-400 font-bold block mb-1">
+              <div className="p-4 rounded-lg bg-[#F0F5FF] border border-[#E5E7EB]">
+                <span className="text-xs font-mono uppercase text-[#245BDB] font-bold block mb-1">
                   THE EXOCROSS SOLUTION
                 </span>
                 <p>{selectedProject.solution}</p>
               </div>
             </div>
 
-            {/* Tech Stack */}
-            <div className="mb-6 sm:mb-8">
-              <span className="text-[10px] sm:text-xs font-mono uppercase text-gray-400 block mb-2">
+            <div className="mb-6">
+              <span className="text-xs font-mono uppercase text-[#737D8C] font-semibold block mb-2">
                 TECHNOLOGIES UTILIZED
               </span>
-              <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {selectedProject.tags.map((t) => (
                   <span
                     key={t}
-                    className="px-2.5 sm:px-3 py-1 rounded-lg bg-blue-500/10 border border-blue-500/30 text-[11px] sm:text-xs font-mono text-blue-300"
+                    className="px-2.5 py-0.5 rounded text-xs font-mono bg-[#F7F8FA] border border-[#E5E7EB] text-[#515B6B]"
                   >
                     {t}
                   </span>
@@ -348,9 +353,8 @@ export default function WhatWeMadeSection() {
               </div>
             </div>
 
-            {/* Footer Action */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 border-t border-white/10">
-              <span className="text-[11px] sm:text-xs font-mono text-gray-400">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-5 border-t border-[#E5E7EB]">
+              <span className="text-xs font-mono text-[#737D8C]">
                 WANT TO BUILD SIMILAR CAPABILITIES?
               </span>
               <button
@@ -361,7 +365,7 @@ export default function WhatWeMadeSection() {
                   if (el) el.scrollIntoView({ behavior: "smooth" });
                 }}
                 data-cursor="DISCUSS"
-                className="w-full sm:w-auto px-6 py-2.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider text-black bg-cyan-400 hover:bg-cyan-300 shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all text-center"
+                className="px-5 py-2.5 rounded-lg text-xs font-semibold uppercase tracking-wider text-white bg-[#245BDB] hover:bg-[#1948B8] transition-colors text-center"
               >
                 Discuss This Architecture →
               </button>

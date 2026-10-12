@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
 import CustomCursor from "@/components/CustomCursor";
 import ThreeCanvas from "@/components/ThreeCanvas";
+import BackgroundVideo from "@/components/BackgroundVideo";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import WhoWeAreSection from "@/components/WhoWeAreSection";
@@ -62,17 +63,20 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#06080d] text-[#f3f4f6] selection:bg-cyan-500 selection:text-black">
-      {/* Cool Loading Screen Animation with Company Logo */}
+    <div className="relative min-h-screen bg-[#FFFFFF] text-[#151A23] selection:bg-[#245BDB] selection:text-white">
+      {/* Loading Splash */}
       {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
 
       {/* Interactive Custom Cursor */}
       <CustomCursor />
 
-      {/* Dynamic Three.js 3D Background with Scroll & Cursor Dynamics */}
+      {/* High-End Enterprise Video Background Stream (EC-Background.mp4) */}
+      <BackgroundVideo />
+
+      {/* Architectural Wireframe Ambient Motion */}
       <ThreeCanvas currentSection={sectionIndex} />
 
-      {/* Main Page Layout */}
+      {/* Main Page Content Layer */}
       <div className="relative z-10 flex flex-col min-h-screen">
         {/* Navigation Bar */}
         <Navbar activeSection={activeSectionId} />

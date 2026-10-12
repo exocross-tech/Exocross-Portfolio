@@ -11,8 +11,6 @@ import {
   Copy,
   Check,
   Send,
-  Sparkles,
-  ChevronDown,
   Clock,
   ShieldCheck,
 } from "lucide-react";
@@ -64,16 +62,15 @@ export default function GetInTouchSection() {
     e.preventDefault();
     sound.playPowerOn();
 
-    // Trigger visual confetti
     try {
       confetti({
-        particleCount: 80,
-        spread: 70,
+        particleCount: 60,
+        spread: 60,
         origin: { y: 0.6 },
-        colors: ["#38bdf8", "#3b82f6", "#06b6d4", "#ffffff"],
+        colors: ["#245bdb", "#24a6c8", "#535d6b", "#151a23"],
       });
     } catch {
-      // Confetti fallback
+      // Fallback
     }
 
     setSubmitted(true);
@@ -82,41 +79,40 @@ export default function GetInTouchSection() {
   return (
     <section
       id="get-in-touch"
-      className="relative py-16 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10"
+      className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10 border-t border-[#E4E7EC]"
     >
       {/* Section Header */}
-      <div className="flex flex-col items-start mb-12 sm:mb-16">
-        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight max-w-3xl">
+      <div className="flex flex-col items-start mb-14 sm:mb-16">
+        <span className="text-xs font-mono text-[#245BDB] uppercase tracking-wider mb-2 block font-semibold">
+          06 // INITIATE DIALOGUE
+        </span>
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#151A23] tracking-tight leading-tight max-w-3xl">
           Tell us what you are working on, or what is not working.
         </h2>
-        <p className="mt-4 text-sm sm:text-base lg:text-lg text-gray-300 max-w-2xl leading-relaxed">
+        <p className="mt-4 text-base sm:text-lg text-[#535D6B] max-w-2xl leading-relaxed">
           We will help you find the right next step. Direct answers, honest timelines, and no
           fluff. We respond within 24 hours.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12">
-        {/* Left Column: Contact Cards & Info */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        {/* Left Column: Direct Communications Directory */}
         <div className="lg:col-span-5 space-y-6">
-          {/* Quick Direct Channels Card */}
-          <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel border border-white/10 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-48 h-48 bg-blue-600/10 rounded-full blur-[80px] pointer-events-none" />
-
-            <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-cyan-400" />
-              <span>Direct Channels</span>
+          <div className="p-6 sm:p-8 rounded-2xl bg-[#F7F8FA] border border-[#E4E7EC]">
+            <h3 className="text-lg font-bold text-[#151A23] mb-6">
+              Direct Channels
             </h3>
 
-            <div className="space-y-5 text-sm font-mono">
+            <div className="space-y-4 text-sm font-mono">
               {/* Email */}
-              <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center justify-between">
+              <div className="p-4 rounded-xl bg-white border border-[#E4E7EC] flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400">
+                  <div className="p-2 rounded-lg bg-[#F0F5FF] text-[#245BDB]">
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-[10px] text-gray-400 block uppercase">Business Email</span>
-                    <span className="text-white font-medium select-all">contact@exocross.com</span>
+                    <span className="text-[10px] text-[#778191] block uppercase">Business Email</span>
+                    <span className="text-[#151A23] font-medium select-all">contact@exocross.com</span>
                   </div>
                 </div>
 
@@ -124,10 +120,10 @@ export default function GetInTouchSection() {
                   onClick={handleCopyEmail}
                   title="Copy email to clipboard"
                   data-cursor="COPY"
-                  className="p-2 rounded-xl bg-white/5 hover:bg-white/15 text-gray-300 transition-colors"
+                  className="p-1.5 rounded-lg text-[#535D6B] hover:text-[#151A23] hover:bg-[#F7F8FA]"
                 >
                   {copiedEmail ? (
-                    <Check className="w-4 h-4 text-emerald-400" />
+                    <Check className="w-4 h-4 text-emerald-600" />
                   ) : (
                     <Copy className="w-4 h-4" />
                   )}
@@ -135,17 +131,17 @@ export default function GetInTouchSection() {
               </div>
 
               {/* Website */}
-              <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-blue-500/10 text-blue-400">
+              <div className="p-4 rounded-xl bg-white border border-[#E4E7EC] flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-[#F0F5FF] text-[#245BDB]">
                   <Globe className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-gray-400 block uppercase">Official Portal</span>
+                  <span className="text-[10px] text-[#778191] block uppercase">Official Portal</span>
                   <a
                     href="https://www.exocross.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white hover:text-cyan-400 font-medium transition-colors"
+                    className="text-[#151A23] hover:text-[#245BDB] font-medium"
                   >
                     www.exocross.com
                   </a>
@@ -153,38 +149,37 @@ export default function GetInTouchSection() {
               </div>
 
               {/* Phone */}
-              <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400">
+              <div className="p-4 rounded-xl bg-white border border-[#E4E7EC] flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-[#F0F5FF] text-[#245BDB]">
                   <Phone className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-gray-400 block uppercase">Direct Client Phone</span>
-                  <span className="text-white font-medium">+1 (800) 396-2767</span>
+                  <span className="text-[10px] text-[#778191] block uppercase">Direct Client Phone</span>
+                  <span className="text-[#151A23] font-medium">+1 (800) 396-2767</span>
                 </div>
               </div>
 
               {/* Location */}
-              <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-indigo-500/10 text-indigo-400">
+              <div className="p-4 rounded-xl bg-white border border-[#E4E7EC] flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-[#F0F5FF] text-[#245BDB]">
                   <MapPin className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-gray-400 block uppercase">Headquarters</span>
-                  <span className="text-white font-medium">
+                  <span className="text-[10px] text-[#778191] block uppercase">Headquarters</span>
+                  <span className="text-[#151A23] font-medium">
                     Global Remote-First Studio (New York & Worldwide)
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* Operational Commitments */}
-            <div className="mt-8 pt-6 border-t border-white/10 space-y-3 text-xs font-mono text-gray-400">
+            <div className="mt-8 pt-6 border-t border-[#E4E7EC] space-y-2.5 text-xs font-mono text-[#535D6B]">
               <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-cyan-400" />
+                <Clock className="w-3.5 h-3.5 text-[#245BDB]" />
                 <span>Response Time: &lt; 24 business hours</span>
               </div>
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-blue-400" />
+                <ShieldCheck className="w-3.5 h-3.5 text-[#245BDB]" />
                 <span>Mutual Non-Disclosure Agreement (NDA) on request</span>
               </div>
             </div>
@@ -193,40 +188,40 @@ export default function GetInTouchSection() {
 
         {/* Right Column: Project Inquiry Form */}
         <div className="lg:col-span-7">
-          <div className="p-5 sm:p-10 rounded-2xl sm:rounded-3xl glass-panel-glow border border-cyan-500/30 relative">
+          <div className="p-6 sm:p-10 rounded-2xl bg-white border border-[#E4E7EC] shadow-xs">
             {submitted ? (
-              <div className="py-12 sm:py-16 flex flex-col items-center justify-center text-center animate-in fade-in duration-300">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400 mb-5 sm:mb-6 shadow-[0_0_30px_rgba(16,185,129,0.3)]">
-                  <Check className="w-7 h-7 sm:w-8 sm:h-8" />
+              <div className="py-12 sm:py-16 flex flex-col items-center justify-center text-center animate-in fade-in duration-200">
+                <div className="w-12 h-12 rounded-full bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-600 mb-5">
+                  <Check className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl sm:text-3xl font-extrabold text-white mb-3">
+                <h3 className="text-2xl font-bold text-[#151A23] mb-2">
                   Message Dispatched Successfully
                 </h3>
-                <p className="text-xs sm:text-sm text-gray-300 max-w-md mb-6 sm:mb-8">
+                <p className="text-sm text-[#535D6B] max-w-md mb-8 leading-relaxed">
                   Thank you for reaching out to Exocross. One of our lead architects will review
                   your requirements and reply within 24 hours.
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
-                  className="px-6 py-2.5 rounded-xl font-mono text-xs uppercase font-bold text-white bg-blue-600 hover:bg-blue-500"
+                  className="px-5 py-2.5 rounded-lg font-mono text-xs uppercase font-semibold text-white bg-[#245BDB] hover:bg-[#1948B8]"
                 >
                   Send Another Inquiry
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
+                  <h3 className="text-xl font-bold text-[#151A23] mb-1">
                     Start a Conversation
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-400">
+                  <p className="text-sm text-[#535D6B]">
                     Select your focus areas and let us know what you want to achieve.
                   </p>
                 </div>
 
                 {/* Service Selector Pills */}
                 <div>
-                  <label className="block text-[11px] sm:text-xs font-mono uppercase tracking-wider text-cyan-300 mb-2.5">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-[#151A23] font-semibold mb-2.5">
                     WHAT CAN WE SOLVE FOR YOU?
                   </label>
                   <div className="flex flex-wrap gap-1.5 sm:gap-2">
@@ -237,10 +232,10 @@ export default function GetInTouchSection() {
                           key={srv}
                           type="button"
                           onClick={() => toggleService(srv)}
-                          className={`px-3 sm:px-3.5 py-1.5 rounded-xl text-[11px] sm:text-xs font-mono transition-all duration-200 border ${
+                          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors border ${
                             isSelected
-                              ? "bg-cyan-500/20 text-cyan-300 border-cyan-400/60 shadow-[0_0_12px_rgba(6,182,212,0.2)]"
-                              : "bg-white/[0.03] text-gray-400 border-white/5 hover:border-white/20"
+                              ? "bg-[#245BDB] text-white border-[#245BDB]"
+                              : "bg-[#F7F8FA] text-[#535D6B] border-[#E4E7EC] hover:border-[#D0D5DD]"
                           }`}
                         >
                           {srv}
@@ -252,7 +247,7 @@ export default function GetInTouchSection() {
 
                 {/* Budget Range */}
                 <div>
-                  <label className="block text-[11px] sm:text-xs font-mono uppercase tracking-wider text-gray-300 mb-2.5">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-[#151A23] font-semibold mb-2.5">
                     ANTICIPATED BUDGET SCOPE
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -264,10 +259,10 @@ export default function GetInTouchSection() {
                           sound.playHover();
                           setBudget(opt);
                         }}
-                        className={`py-2 px-2.5 sm:px-3 rounded-xl text-[11px] sm:text-xs font-mono text-center transition-all border ${
+                        className={`py-2 px-3 rounded-lg text-xs font-mono text-center transition-colors border ${
                           budget === opt
-                            ? "bg-blue-600/30 text-white border-blue-500/70 shadow-[0_0_12px_rgba(59,130,246,0.3)] font-bold"
-                            : "bg-white/[0.03] text-gray-400 border-white/5 hover:border-white/20"
+                            ? "bg-[#F0F5FF] text-[#245BDB] border-[#245BDB] font-semibold"
+                            : "bg-[#F7F8FA] text-[#535D6B] border-[#E4E7EC] hover:border-[#D0D5DD]"
                         }`}
                       >
                         {opt}
@@ -277,9 +272,9 @@ export default function GetInTouchSection() {
                 </div>
 
                 {/* Input Fields */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[10px] sm:text-xs font-mono text-gray-400 mb-1">
+                    <label className="block text-xs font-mono text-[#535D6B] mb-1">
                       YOUR NAME *
                     </label>
                     <input
@@ -288,12 +283,12 @@ export default function GetInTouchSection() {
                       placeholder="e.g. Alex Vance"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white text-base sm:text-sm focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400/50 transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#E4E7EC] text-[#151A23] text-sm focus:border-[#245BDB] focus:outline-none focus:ring-1 focus:ring-[#245BDB] transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[10px] sm:text-xs font-mono text-gray-400 mb-1">
+                    <label className="block text-xs font-mono text-[#535D6B] mb-1">
                       WORK EMAIL *
                     </label>
                     <input
@@ -302,13 +297,13 @@ export default function GetInTouchSection() {
                       placeholder="alex@company.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white text-base sm:text-sm focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400/50 transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#E4E7EC] text-[#151A23] text-sm focus:border-[#245BDB] focus:outline-none focus:ring-1 focus:ring-[#245BDB] transition-colors"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] sm:text-xs font-mono text-gray-400 mb-1">
+                  <label className="block text-xs font-mono text-[#535D6B] mb-1">
                     COMPANY / ORGANIZATION
                   </label>
                   <input
@@ -316,12 +311,12 @@ export default function GetInTouchSection() {
                     placeholder="e.g. Acme Technologies"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white text-base sm:text-sm focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400/50 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#E4E7EC] text-[#151A23] text-sm focus:border-[#245BDB] focus:outline-none focus:ring-1 focus:ring-[#245BDB] transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] sm:text-xs font-mono text-gray-400 mb-1">
+                  <label className="block text-xs font-mono text-[#535D6B] mb-1">
                     PROJECT GOALS OR CURRENT ISSUES *
                   </label>
                   <textarea
@@ -330,17 +325,16 @@ export default function GetInTouchSection() {
                     placeholder="Tell us what you are building, what is not working, or your target timeline..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white text-base sm:text-sm focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400/50 transition-colors resize-none"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#E4E7EC] text-[#151A23] text-sm focus:border-[#245BDB] focus:outline-none focus:ring-1 focus:ring-[#245BDB] transition-colors resize-none"
                   />
                 </div>
 
-                {/* Submit Action */}
                 <button
                   type="submit"
                   data-cursor="SUBMIT"
-                  className="w-full py-3.5 sm:py-4 rounded-xl font-mono text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-700 hover:from-blue-500 hover:via-cyan-500 hover:to-blue-600 shadow-[0_0_30px_rgba(37,99,235,0.4)] border border-cyan-400/40 transition-all flex items-center justify-center gap-2 active:scale-95"
+                  className="w-full py-3.5 rounded-lg font-mono text-xs font-bold uppercase tracking-wider text-white bg-[#245BDB] hover:bg-[#1948B8] transition-colors flex items-center justify-center gap-2"
                 >
-                  <Send className="w-4 h-4" />
+                  <Send className="w-3.5 h-3.5" />
                   <span>Transmit Inquiry to Exocross</span>
                 </button>
               </form>

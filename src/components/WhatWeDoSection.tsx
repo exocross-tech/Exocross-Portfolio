@@ -182,21 +182,24 @@ export default function WhatWeDoSection() {
   return (
     <section
       id="what-we-do"
-      className="relative py-16 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10"
+      className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10 border-t border-[#E5E7EB]"
     >
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 sm:mb-16 gap-6">
         <div>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          <span className="text-xs font-mono text-[#245BDB] uppercase tracking-wider mb-2 block font-semibold">
+            02 // SERVICES DIRECTORY
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#161B26] tracking-tight leading-tight">
             What we do
           </h2>
-          <p className="mt-3 text-sm sm:text-base lg:text-lg text-gray-300 max-w-2xl">
+          <p className="mt-3 text-base sm:text-lg text-[#515B6B] max-w-2xl">
             Every service is tailored around how your business actually runs.
           </p>
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex items-center gap-1.5 sm:gap-2 p-1.5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md overflow-x-auto max-w-full">
+        {/* Clean Filter Controls */}
+        <div className="flex items-center gap-1.5 p-1 rounded-lg border border-[#E5E7EB] bg-[#F7F8FA] overflow-x-auto max-w-full">
           {[
             { id: "all", label: "All Services" },
             { id: "engineering", label: "Engineering" },
@@ -210,10 +213,10 @@ export default function WhatWeDoSection() {
                 setFilter(tab.id as typeof filter);
               }}
               data-cursor="FILTER"
-              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-mono tracking-wider transition-all duration-200 shrink-0 ${
+              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors shrink-0 ${
                 filter === tab.id
-                  ? "bg-blue-600 text-white font-bold shadow-[0_0_15px_rgba(37,99,235,0.4)]"
-                  : "text-gray-400 hover:text-white hover:bg-white/[0.04]"
+                  ? "bg-white text-[#161B26] font-semibold shadow-xs"
+                  : "text-[#515B6B] hover:text-[#161B26]"
               }`}
             >
               {tab.label}
@@ -222,8 +225,8 @@ export default function WhatWeDoSection() {
         </div>
       </div>
 
-      {/* Services Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      {/* Services Grid: Clean Architectural White Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {filteredServices.map((service, idx) => {
           const Icon = service.icon;
           return (
@@ -232,26 +235,23 @@ export default function WhatWeDoSection() {
               onClick={() => handleServiceSelect(service)}
               onMouseEnter={() => sound.playHover()}
               data-cursor="EXPAND"
-              className="group relative p-6 rounded-3xl glass-card flex flex-col justify-between cursor-pointer border border-white/10 hover:border-cyan-400/50 hover:shadow-[0_10px_35px_-10px_rgba(6,182,212,0.25)] transition-all duration-300"
+              className="group p-6 rounded-xl bg-white border border-[#E5E7EB] hover:border-[#D1D5DB] hover:shadow-[0_8px_20px_-4px_rgba(15,23,42,0.08)] cursor-pointer flex flex-col justify-between transition-all duration-200"
             >
               <div>
-                {/* Header Icon + Number */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="p-3 rounded-2xl bg-white/[0.05] border border-white/10 group-hover:bg-cyan-500/20 group-hover:border-cyan-400/40 text-cyan-400 transition-colors duration-300">
-                    <Icon className="w-6 h-6" />
+                <div className="flex items-center justify-between mb-5">
+                  <div className="w-10 h-10 rounded-lg bg-[#F7F8FA] border border-[#E5E7EB] flex items-center justify-center text-[#245BDB] group-hover:bg-[#F0F5FF] transition-colors">
+                    <Icon className="w-5 h-5" />
                   </div>
-                  <span className="text-xs font-mono text-gray-500 group-hover:text-cyan-300 transition-colors">
+                  <span className="text-xs font-mono text-[#737D8C]">
                     0{idx + 1}
                   </span>
                 </div>
 
-                {/* Service Name */}
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                <h3 className="text-lg font-bold text-[#161B26] mb-2 group-hover:text-[#245BDB] transition-colors">
                   {service.name}
                 </h3>
 
-                {/* Description verbatim from document */}
-                <p className="text-sm text-gray-400 leading-relaxed line-clamp-3 mb-6">
+                <p className="text-sm text-[#515B6B] leading-relaxed mb-6 line-clamp-3">
                   {service.description}
                 </p>
               </div>
@@ -262,22 +262,21 @@ export default function WhatWeDoSection() {
                   {service.techStack.slice(0, 3).map((tech) => (
                     <span
                       key={tech}
-                      className="px-2 py-0.5 rounded-md bg-white/[0.04] border border-white/5 text-[10px] font-mono text-gray-400"
+                      className="px-2 py-0.5 rounded text-[11px] font-mono bg-[#F7F8FA] text-[#515B6B]"
                     >
                       {tech}
                     </span>
                   ))}
                   {service.techStack.length > 3 && (
-                    <span className="px-1.5 py-0.5 text-[10px] font-mono text-cyan-400">
+                    <span className="px-1 py-0.5 text-[11px] font-mono text-[#737D8C]">
                       +{service.techStack.length - 3}
                     </span>
                   )}
                 </div>
 
-                {/* View details footer */}
-                <div className="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono text-gray-400 group-hover:text-white transition-colors">
+                <div className="pt-4 border-t border-[#E5E7EB]/60 flex items-center justify-between text-xs font-medium text-[#515B6B] group-hover:text-[#245BDB] transition-colors">
                   <span>View Details</span>
-                  <ArrowUpRight className="w-4 h-4 text-cyan-400 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <ArrowUpRight className="w-3.5 h-3.5" />
                 </div>
               </div>
             </div>
@@ -285,65 +284,61 @@ export default function WhatWeDoSection() {
         })}
       </div>
 
-      {/* Interactive Detail Modal / Drawer */}
+      {/* Interactive Detail Modal */}
       {selectedService && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl animate-in fade-in duration-200">
-          <div className="relative max-w-xl w-full p-6 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel-glow border border-cyan-500/40 shadow-[0_25px_60px_rgba(0,0,0,0.8)] max-h-[88vh] overflow-y-auto">
-            {/* Close Button */}
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#161B26]/40 backdrop-blur-xs animate-fade-in duration-150">
+          <div className="relative max-w-xl w-full p-6 sm:p-8 rounded-xl bg-white border border-[#E5E7EB] shadow-[0_20px_48px_rgba(15,23,42,0.16)] max-h-[88vh] overflow-y-auto animate-fade-in-up">
             <button
               onClick={() => {
                 sound.playClick();
                 setSelectedService(null);
               }}
+              aria-label="Close dialog"
               data-cursor="CLOSE"
-              className="absolute top-4 sm:top-6 right-4 sm:right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 hover:text-white transition-colors"
+              className="absolute top-5 right-5 p-1.5 rounded-lg text-[#515B6B] hover:text-[#161B26] hover:bg-[#F7F8FA] transition-colors"
             >
               ✕
             </button>
 
-            {/* Service Header */}
-            <div className="flex items-center gap-3 sm:gap-4 mb-5 sm:mb-6 pr-8">
-              <div className="p-3 sm:p-3.5 rounded-2xl bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 shrink-0">
-                <selectedService.icon className="w-6 h-6 sm:w-7 sm:h-7" />
+            <div className="flex items-center gap-3.5 mb-5 pr-8">
+              <div className="w-11 h-11 rounded-lg bg-[#F0F5FF] border border-[#E5E7EB] flex items-center justify-center text-[#245BDB] shrink-0">
+                <selectedService.icon className="w-6 h-6" />
               </div>
               <div>
-                <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-cyan-400">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#737D8C]">
                   DISCIPLINE SPECIFICATION
                 </span>
-                <h3 className="text-xl sm:text-2xl font-bold text-white">{selectedService.name}</h3>
+                <h3 className="text-xl font-bold text-[#161B26]">{selectedService.name}</h3>
               </div>
             </div>
 
-            {/* Full Description */}
-            <p className="text-sm sm:text-base text-gray-200 leading-relaxed mb-5 sm:mb-6">
+            <p className="text-sm text-[#515B6B] leading-relaxed mb-6">
               {selectedService.description}
             </p>
 
-            {/* Key Deliverables */}
-            <div className="mb-5 sm:mb-6">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-cyan-300 mb-3">
+            <div className="mb-6">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-[#161B26] font-semibold mb-3">
                 KEY DELIVERABLES & OUTCOMES
               </h4>
               <div className="space-y-2">
                 {selectedService.deliverables.map((item, i) => (
-                  <div key={i} className="flex items-start gap-2 text-xs sm:text-sm text-gray-300">
-                    <Check className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                  <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#515B6B]">
+                    <Check className="w-4 h-4 text-[#245BDB] shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Tech Stack */}
-            <div className="mb-6 sm:mb-8">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">
+            <div className="mb-6">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-[#737D8C] font-semibold mb-2">
                 TECHNOLOGY & TOOLING
               </h4>
-              <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {selectedService.techStack.map((tech) => (
                   <span
                     key={tech}
-                    className="px-2.5 sm:px-3 py-1 rounded-lg bg-blue-500/10 border border-blue-500/30 text-[11px] sm:text-xs font-mono text-blue-300"
+                    className="px-2.5 py-1 rounded text-xs font-mono bg-[#F7F8FA] border border-[#E5E7EB] text-[#515B6B]"
                   >
                     {tech}
                   </span>
@@ -351,15 +346,14 @@ export default function WhatWeDoSection() {
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 border-t border-white/10">
-              <span className="text-[11px] sm:text-xs font-mono text-emerald-400">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-5 border-t border-[#E5E7EB]">
+              <span className="text-xs font-mono text-emerald-600">
                 ● Available for New Engagements
               </span>
               <button
                 onClick={() => handleInquire(selectedService.name)}
                 data-cursor="ENGAGE"
-                className="w-full sm:w-auto px-6 py-2.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all text-center"
+                className="px-5 py-2.5 rounded-lg text-xs font-semibold uppercase tracking-wider text-white bg-[#245BDB] hover:bg-[#1948B8] transition-colors text-center"
               >
                 Inquire For This Service →
               </button>

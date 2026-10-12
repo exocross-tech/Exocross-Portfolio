@@ -2,15 +2,22 @@
 
 @layer base {
   :root {
-    --background: #06080d;
-    --foreground: #f3f4f6;
-    --card: #0c1017;
-    --card-hover: #131924;
-    --accent: #3b82f6;
-    --accent-glow: #60a5fa;
-    --accent-cyan: #06b6d4;
-    --border: rgba(255, 255, 255, 0.08);
-    --border-hover: rgba(59, 130, 246, 0.4);
+    --background: #FFFFFF;
+    --foreground: #161B26;
+    --section-alt: #F7F8FA;
+    --subtle-blue: #F0F5FF;
+    --text-primary: #161B26;
+    --text-secondary: #515B6B;
+    --text-muted: #737D8C;
+    --brand-blue: #245BDB;
+    --brand-blue-hover: #1948B8;
+    --cyan-accent: #19A4C7;
+    --border: #E5E7EB;
+    --border-hover: #D1D5DB;
+    --card: #FFFFFF;
+    --shadow-soft: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+    --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+    --shadow-hover: 0 16px 32px -4px rgba(15, 23, 42, 0.10), 0 4px 8px -2px rgba(15, 23, 42, 0.04);
   }
 }
 
@@ -20,13 +27,13 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #06080d;
-  color: #f3f4f6;
+  background-color: #FFFFFF;
+  color: #161B26;
 }
 
 body {
-  background-color: #06080d;
-  color: #f3f4f6;
+  background-color: #FFFFFF;
+  color: #161B26;
   overflow-x: hidden;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   cursor: default;
@@ -37,103 +44,76 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #06080d;
+  background: #FFFFFF;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #D1D5DB;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b82f6;
+  background: #9CA3AF;
 }
 
-/* Custom Glassmorphic Utilities */
-.glass-panel {
-  background: rgba(12, 16, 23, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.glass-panel-glow {
-  background: rgba(12, 16, 23, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(59, 130, 246, 0.25);
-  box-shadow: 0 0 30px -10px rgba(59, 130, 246, 0.15);
-}
-
-.glass-card {
-  background: radial-gradient(120% 120% at 50% 0%, rgba(25, 33, 48, 0.45) 0%, rgba(10, 14, 21, 0.6) 100%);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glass-card:hover {
-  border-color: rgba(59, 130, 246, 0.4);
-  transform: translateY(-4px);
-  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.5), 0 0 25px -5px rgba(59, 130, 246, 0.2);
-}
-
-/* Subtle grid overlay */
-.bg-cyber-grid {
-  background-size: 40px 40px;
+/* Subtle Technical Grid Background */
+.bg-enterprise-grid {
+  background-size: 32px 32px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
 }
 
-/* Glowing text effects */
-.text-gradient {
-  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Editorial subtle borders & shadows */
+.card-enterprise {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.text-gradient-cyan {
-  background: linear-gradient(135deg, #60a5fa 0%, #38bdf8 50%, #22d3ee 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.card-enterprise:hover {
+  border-color: #D1D5DB;
+  box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.08);
+  transform: translateY(-2px);
 }
 
-.text-gradient-silver {
-  background: linear-gradient(135deg, #ffffff 20%, #94a3b8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Glow pulse animation */
-@keyframes pulseGlow {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(1);
+/* Clean Entrance Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
   }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.05);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.animate-pulse-glow {
-  animation: pulseGlow 4s ease-in-out infinite;
-}
-
-/* Fluid subtle gradient shimmer for headline text */
-@keyframes gradientFlow {
-  0% {
-    background-position: 0% 50%;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+  to {
+    opacity: 1;
   }
 }
 
-.animate-gradient-flow {
-  background-size: 200% auto;
-  animation: gradientFlow 5s ease infinite;
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-delay: 0s !important;
+    transition-duration: 0s !important;
+  }
 }

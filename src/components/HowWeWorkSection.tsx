@@ -128,22 +128,25 @@ export default function HowWeWorkSection() {
   return (
     <section
       id="how-we-work"
-      className="relative py-16 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10"
+      className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10 border-t border-[#E4E7EC]"
     >
       {/* Section Header */}
-      <div className="flex flex-col items-start mb-12 sm:mb-16">
-        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight max-w-3xl">
+      <div className="flex flex-col items-start mb-14 sm:mb-16">
+        <span className="text-xs font-mono text-[#245BDB] uppercase tracking-wider mb-2 block font-semibold">
+          04 // ENGINEERING PROCESS
+        </span>
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#151A23] tracking-tight leading-tight max-w-3xl">
           How we work
         </h2>
-        <p className="mt-4 text-sm sm:text-base lg:text-lg text-gray-300 max-w-2xl leading-relaxed">
+        <p className="mt-4 text-base sm:text-lg text-[#535D6B] max-w-2xl leading-relaxed">
           A disciplined 5-stage framework. Zero guesswork.
         </p>
       </div>
 
-      {/* 5-Step Process Interactive Stepper */}
-      <div className="mb-16 sm:mb-24">
-        {/* Step Navigation Bar */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 mb-6 sm:mb-8">
+      {/* Structured Engineering Timeline Framework */}
+      <div className="mb-20 sm:mb-24">
+        {/* Horizontal Process Tabs */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-8">
           {workflowSteps.map((s, idx) => {
             const Icon = s.icon;
             const isCurrent = activeStep === idx;
@@ -156,97 +159,90 @@ export default function HowWeWorkSection() {
                 }}
                 onMouseEnter={() => sound.playHover()}
                 data-cursor="STAGE"
-                className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl border text-left transition-all duration-300 relative flex flex-col justify-between ${
+                className={`p-4 rounded-xl border text-left transition-all ${
                   isCurrent
-                    ? "bg-blue-600/20 border-cyan-400 shadow-[0_0_25px_rgba(6,182,212,0.3)]"
-                    : "bg-white/[0.02] border-white/10 hover:border-white/20 hover:bg-white/[0.04]"
+                    ? "bg-[#F0F5FF] border-[#245BDB] shadow-xs"
+                    : "bg-white border-[#E4E7EC] hover:border-[#D0D5DD]"
                 }`}
               >
-                <div className="flex items-center justify-between mb-2 sm:mb-3">
+                <div className="flex items-center justify-between mb-3">
                   <span
-                    className={`text-[10px] sm:text-xs font-mono font-bold ${
-                      isCurrent ? "text-cyan-300" : "text-gray-500"
+                    className={`text-xs font-mono font-bold ${
+                      isCurrent ? "text-[#245BDB]" : "text-[#778191]"
                     }`}
                   >
-                    STEP {s.step}
+                    PHASE {s.step}
                   </span>
                   <Icon
-                    className={`w-4 h-4 sm:w-5 sm:h-5 ${isCurrent ? "text-cyan-400" : "text-gray-400"}`}
+                    className={`w-4 h-4 ${isCurrent ? "text-[#245BDB]" : "text-[#778191]"}`}
                   />
                 </div>
                 <div
-                  className={`text-sm sm:text-base font-bold ${
-                    isCurrent ? "text-white" : "text-gray-300"
+                  className={`text-sm font-bold ${
+                    isCurrent ? "text-[#151A23]" : "text-[#535D6B]"
                   }`}
                 >
                   {s.name}
                 </div>
-                {isCurrent && (
-                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-b-xl sm:rounded-b-2xl" />
-                )}
               </button>
             );
           })}
         </div>
 
-        {/* Active Step Showcase Card */}
+        {/* Detailed Active Stage Box */}
         {(() => {
           const cur = workflowSteps[activeStep];
           const CurIcon = cur.icon;
           return (
-            <div className="p-5 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl glass-panel-glow border border-cyan-500/30 relative overflow-hidden transition-all duration-500">
-              <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
-
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center relative z-10">
+            <div className="p-6 sm:p-10 rounded-2xl bg-[#F7F8FA] border border-[#E4E7EC]">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 <div className="lg:col-span-7">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2.5 sm:p-3 rounded-2xl bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 shrink-0">
-                      <CurIcon className="w-6 h-6 sm:w-8 sm:h-8" />
+                  <div className="flex items-center gap-3.5 mb-5">
+                    <div className="w-11 h-11 rounded-lg bg-white border border-[#E4E7EC] flex items-center justify-center text-[#245BDB] shrink-0">
+                      <CurIcon className="w-6 h-6" />
                     </div>
                     <div>
-                      <span className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-cyan-400">
-                        PHASE {cur.step}
+                      <span className="text-xs font-mono uppercase tracking-wider text-[#778191]">
+                        STAGE {cur.step} EXECUTION
                       </span>
-                      <h3 className="text-2xl sm:text-3xl font-extrabold text-white">{cur.name}</h3>
+                      <h3 className="text-2xl font-bold text-[#151A23]">{cur.name}</h3>
                     </div>
                   </div>
 
-                  <p className="text-lg text-gray-200 font-medium mb-3">{cur.summary}</p>
-                  <p className="text-sm text-gray-300 leading-relaxed mb-6">{cur.details}</p>
+                  <p className="text-base text-[#151A23] font-semibold mb-3">{cur.summary}</p>
+                  <p className="text-sm text-[#535D6B] leading-relaxed mb-6">{cur.details}</p>
 
                   <div className="space-y-2.5">
                     {cur.deliverables.map((del, i) => (
-                      <div key={i} className="flex items-center gap-2.5 text-sm text-gray-200 font-mono">
-                        <CheckCircle className="w-4 h-4 text-cyan-400 shrink-0" />
+                      <div key={i} className="flex items-center gap-2.5 text-sm text-[#535D6B]">
+                        <CheckCircle className="w-4 h-4 text-[#245BDB] shrink-0" />
                         <span>{del}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Right Interactive Telemetry Box */}
-                <div className="lg:col-span-5 bg-black/50 p-6 rounded-2xl border border-white/10 font-mono text-xs">
-                  <div className="text-gray-400 border-b border-white/10 pb-3 mb-4 flex justify-between">
-                    <span>STAGE TELEMETRY</span>
-                    <span className="text-emerald-400">VALIDATED</span>
+                <div className="lg:col-span-5 bg-white p-6 rounded-xl border border-[#E4E7EC] text-xs font-mono">
+                  <div className="text-[#778191] border-b border-[#F2F4F7] pb-3 mb-4 flex justify-between font-semibold">
+                    <span>STAGE SPECIFICATION</span>
+                    <span className="text-emerald-600">CERTIFIED</span>
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-3.5">
                     <div>
-                      <span className="text-gray-500 text-[10px] block">CLIENT INVOLVEMENT</span>
-                      <span className="text-white text-sm">Collaborative Staging Demos</span>
+                      <span className="text-[#778191] text-[10px] block">CLIENT INVOLVEMENT</span>
+                      <span className="text-[#151A23] text-sm font-semibold">Collaborative Staging Demos</span>
                     </div>
                     <div>
-                      <span className="text-gray-500 text-[10px] block">DOCUMENTATION</span>
-                      <span className="text-cyan-300 text-sm">Full Schemas & Codebase Ownership</span>
+                      <span className="text-[#778191] text-[10px] block">DOCUMENTATION</span>
+                      <span className="text-[#245BDB] text-sm font-semibold">Full Schemas & Codebase Ownership</span>
                     </div>
-                    <div>
-                      <span className="text-gray-500 text-[10px] block">NEXT TRANSITION</span>
+                    <div className="pt-2">
                       <button
                         onClick={() => {
                           sound.playClick();
                           setActiveStep((prev) => (prev + 1) % workflowSteps.length);
                         }}
-                        className="text-xs text-blue-400 hover:text-cyan-300 underline font-bold mt-1 inline-block"
+                        className="text-xs text-[#245BDB] hover:text-[#1948B8] font-bold inline-block"
                       >
                         Advance to Step {((activeStep + 1) % workflowSteps.length) + 1} →
                       </button>
@@ -259,46 +255,46 @@ export default function HowWeWorkSection() {
         })()}
       </div>
 
-      {/* Why Choose Exocross Section Header */}
-      <div className="flex flex-col items-start mb-8 sm:mb-12">
-        <h3 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
+      {/* Why Choose Exocross Header */}
+      <div className="flex flex-col items-start mb-10">
+        <h3 className="text-2xl sm:text-3xl font-bold text-[#151A23] tracking-tight">
           Why Choose Exocross
         </h3>
-        <p className="mt-2 text-xs sm:text-sm lg:text-base text-gray-400 max-w-2xl">
+        <p className="mt-2 text-sm sm:text-base text-[#535D6B] max-w-2xl">
           What makes working with Exocross fundamentally different from traditional vendors or
           outsourcing shops.
         </p>
       </div>
 
       {/* 5 Core Pillars Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {whyChooseData.map((item, idx) => {
           const Icon = item.icon;
           return (
             <div
               key={idx}
               onMouseEnter={() => sound.playHover()}
-              className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl glass-card border border-white/10 hover:border-cyan-400/40 flex flex-col justify-between transition-all duration-300"
+              className="p-6 rounded-xl bg-white border border-[#E4E7EC] hover:border-[#D0D5DD] flex flex-col justify-between transition-all"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <div className="p-3 rounded-2xl bg-white/[0.05] border border-white/10 text-cyan-400">
+                  <div className="w-10 h-10 rounded-lg bg-[#F7F8FA] border border-[#E4E7EC] flex items-center justify-center text-[#245BDB]">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <span className="px-2.5 py-0.5 rounded-full text-[9px] font-mono tracking-widest uppercase bg-blue-500/10 text-cyan-300 border border-blue-500/20">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-mono tracking-wider uppercase bg-[#F0F5FF] text-[#245BDB] font-semibold border border-[#D0E2FF]">
                     {item.badge}
                   </span>
                 </div>
 
-                <h4 className="text-lg font-bold text-white mb-2">{item.title}</h4>
-                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                <h4 className="text-base font-bold text-[#151A23] mb-2">{item.title}</h4>
+                <p className="text-xs sm:text-sm text-[#535D6B] leading-relaxed">
                   {item.description}
                 </p>
               </div>
 
-              <div className="mt-6 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-gray-500">
+              <div className="mt-6 pt-3 border-t border-[#F2F4F7] flex items-center justify-between text-[11px] font-mono text-[#778191]">
                 <span>PILLAR 0{idx + 1}</span>
-                <span className="text-cyan-400">GUARANTEED</span>
+                <span className="text-[#245BDB]">GUARANTEED</span>
               </div>
             </div>
           );

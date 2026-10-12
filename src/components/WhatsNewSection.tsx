@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { sound } from "@/lib/sound";
-import { Calendar, Clock, ArrowUpRight, Sparkles, Tag, BookOpen } from "lucide-react";
+import { Calendar, Clock, ArrowUpRight, BookOpen } from "lucide-react";
 
 export interface ArticleItem {
   id: string;
@@ -84,29 +84,32 @@ export default function WhatsNewSection() {
   return (
     <section
       id="whats-new"
-      className="relative py-16 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10"
+      className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10 border-t border-[#E4E7EC]"
     >
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 sm:mb-16 gap-6">
         <div>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          <span className="text-xs font-mono text-[#245BDB] uppercase tracking-wider mb-2 block font-semibold">
+            05 // INSIGHTS & DISPATCHES
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#151A23] tracking-tight leading-tight">
             Latest Insights & Releases
           </h2>
-          <p className="mt-3 text-sm sm:text-base lg:text-lg text-gray-300 max-w-2xl">
+          <p className="mt-3 text-base sm:text-lg text-[#535D6B] max-w-2xl">
             Engineering dispatches, product launches, and practical thoughts on modern software
             architecture from the Exocross team.
           </p>
         </div>
 
-        <div className="text-xs font-mono text-cyan-400 flex items-center gap-2 bg-white/[0.03] px-3.5 sm:px-4 py-2 rounded-xl border border-white/10 w-fit">
-          <Sparkles className="w-4 h-4 text-cyan-400" />
+        <div className="text-xs font-mono text-[#535D6B] flex items-center gap-2 bg-[#F7F8FA] px-3.5 py-1.5 rounded-lg border border-[#E4E7EC] w-fit">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
           <span>UPDATED REGULARLY</span>
         </div>
       </div>
 
-      {/* Articles Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
-        {articlesData.map((article, idx) => (
+      {/* Editorial Articles Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        {articlesData.map((article) => (
           <article
             key={article.id}
             onClick={() => {
@@ -115,16 +118,15 @@ export default function WhatsNewSection() {
             }}
             onMouseEnter={() => sound.playHover()}
             data-cursor="READ"
-            className="group p-5 sm:p-8 rounded-2xl sm:rounded-3xl glass-card border border-white/10 hover:border-cyan-400/50 cursor-pointer flex flex-col justify-between transition-all duration-300 shadow-[0_10px_35px_rgba(0,0,0,0.4)]"
+            className="group p-6 sm:p-8 rounded-xl bg-white border border-[#E4E7EC] hover:border-[#D0D5DD] hover:shadow-[0_8px_20px_-4px_rgba(16,24,40,0.08)] cursor-pointer flex flex-col justify-between transition-all"
           >
             <div>
-              {/* Category & Meta */}
-              <div className="flex items-center justify-between mb-4 sm:mb-6">
-                <span className="px-2.5 sm:px-3 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
+              <div className="flex items-center justify-between mb-4">
+                <span className="px-2.5 py-0.5 rounded text-[11px] font-mono tracking-wider uppercase bg-[#F0F5FF] text-[#245BDB] border border-[#D0E2FF] font-semibold">
                   {article.category}
                 </span>
 
-                <div className="flex items-center gap-3 text-xs font-mono text-gray-400">
+                <div className="flex items-center gap-3 text-xs font-mono text-[#778191]">
                   <span className="flex items-center gap-1">
                     <Calendar className="w-3.5 h-3.5" />
                     {article.date}
@@ -137,34 +139,31 @@ export default function WhatsNewSection() {
                 </div>
               </div>
 
-              {/* Title */}
-              <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors mb-3 leading-snug">
+              <h3 className="text-xl sm:text-2xl font-bold text-[#151A23] group-hover:text-[#245BDB] transition-colors mb-3 leading-snug">
                 {article.title}
               </h3>
 
-              {/* Excerpt */}
-              <p className="text-sm text-gray-400 leading-relaxed mb-6">
+              <p className="text-sm text-[#535D6B] leading-relaxed mb-6">
                 {article.excerpt}
               </p>
             </div>
 
             <div>
-              {/* Tags & Action */}
-              <div className="flex items-center justify-between pt-4 border-t border-white/5">
+              <div className="flex items-center justify-between pt-4 border-t border-[#F2F4F7]">
                 <div className="flex flex-wrap gap-1.5">
                   {article.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-0.5 rounded-md bg-white/[0.04] text-[10px] font-mono text-gray-400"
+                      className="px-2 py-0.5 rounded text-[11px] font-mono bg-[#F7F8FA] text-[#535D6B]"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex items-center gap-1 text-xs font-mono text-cyan-400 group-hover:translate-x-1 transition-transform">
+                <div className="flex items-center gap-1 text-xs font-semibold text-[#245BDB]">
                   <span>Read Article</span>
-                  <ArrowUpRight className="w-4 h-4" />
+                  <ArrowUpRight className="w-3.5 h-3.5" />
                 </div>
               </div>
             </div>
@@ -174,49 +173,44 @@ export default function WhatsNewSection() {
 
       {/* Article Detail Modal */}
       {selectedArticle && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/85 backdrop-blur-2xl animate-in fade-in duration-200">
-          <div className="relative max-w-2xl w-full p-6 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel-glow border border-cyan-500/40 shadow-[0_25px_70px_rgba(0,0,0,0.9)] max-h-[88vh] overflow-y-auto">
-            {/* Close Button */}
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#151A23]/40 backdrop-blur-xs animate-in fade-in duration-150">
+          <div className="relative max-w-2xl w-full p-6 sm:p-8 rounded-xl bg-white border border-[#E4E7EC] shadow-[0_20px_48px_rgba(16,24,40,0.16)] max-h-[88vh] overflow-y-auto">
             <button
               onClick={() => {
                 sound.playClick();
                 setSelectedArticle(null);
               }}
+              aria-label="Close dialog"
               data-cursor="CLOSE"
-              className="absolute top-4 sm:top-6 right-4 sm:right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 hover:text-white transition-colors"
+              className="absolute top-5 right-5 p-1.5 rounded-lg text-[#535D6B] hover:text-[#151A23] hover:bg-[#F7F8FA] transition-colors"
             >
               ✕
             </button>
 
-            {/* Modal Header */}
-            <div className="mb-5 sm:mb-6 pr-8">
-              <div className="flex items-center gap-2 sm:gap-3 text-xs font-mono text-cyan-400 mb-2">
-                <span className="px-2.5 py-0.5 rounded bg-cyan-500/20 border border-cyan-400/40 text-[10px] sm:text-xs">
+            <div className="mb-6 pr-8">
+              <div className="flex items-center gap-2.5 text-xs font-mono text-[#778191] mb-2">
+                <span className="px-2 py-0.5 rounded bg-[#F0F5FF] text-[#245BDB] font-semibold">
                   {selectedArticle.category}
                 </span>
                 <span>{selectedArticle.date}</span>
                 <span>•</span>
                 <span>{selectedArticle.readTime}</span>
               </div>
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white leading-tight">
+              <h3 className="text-2xl sm:text-3xl font-bold text-[#151A23] leading-tight">
                 {selectedArticle.title}
               </h3>
             </div>
 
-            {/* Article Body */}
-            <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-gray-300 leading-relaxed font-sans border-t border-b border-white/10 py-5 sm:py-6 mb-5 sm:mb-6">
+            <div className="space-y-4 text-sm sm:text-base text-[#535D6B] leading-relaxed border-t border-b border-[#E4E7EC] py-6 mb-6">
               {selectedArticle.content.map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
               ))}
             </div>
 
-            {/* Tags & Author Info */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-              <div className="flex items-center gap-2">
-                <BookOpen className="w-4 h-4 text-cyan-400 shrink-0" />
-                <span className="text-[10px] sm:text-xs font-mono text-gray-400">
-                  BY EXOCROSS CORE RESEARCH LABS
-                </span>
+              <div className="flex items-center gap-2 text-xs font-mono text-[#778191]">
+                <BookOpen className="w-4 h-4 text-[#245BDB] shrink-0" />
+                <span>BY EXOCROSS CORE RESEARCH LABS</span>
               </div>
 
               <button
@@ -224,7 +218,7 @@ export default function WhatsNewSection() {
                   sound.playClick();
                   setSelectedArticle(null);
                 }}
-                className="w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs font-mono uppercase font-bold tracking-wider text-white bg-blue-600 hover:bg-blue-500 text-center"
+                className="px-5 py-2.5 rounded-lg text-xs font-semibold uppercase tracking-wider text-[#151A23] bg-[#F7F8FA] hover:bg-[#E4E7EC] text-center"
               >
                 Close Read
               </button>
