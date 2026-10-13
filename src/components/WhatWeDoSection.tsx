@@ -182,10 +182,10 @@ export default function WhatWeDoSection() {
   return (
     <section
       id="what-we-do"
-      className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10 border-t border-[#E5E7EB]"
+      className="relative py-16 sm:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10 border-t border-[#E5E7EB]"
     >
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 sm:mb-16 gap-6">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-14 lg:mb-16 gap-6">
         <div>
           <span className="text-xs font-mono text-[#245BDB] uppercase tracking-wider mb-2 block font-semibold">
             02 // SERVICES DIRECTORY
@@ -193,13 +193,13 @@ export default function WhatWeDoSection() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#161B26] tracking-tight leading-tight">
             What we do
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-[#515B6B] max-w-2xl">
+          <p className="mt-2 sm:mt-3 text-sm sm:text-base lg:text-lg text-[#515B6B] max-w-2xl">
             Every service is tailored around how your business actually runs.
           </p>
         </div>
 
-        {/* Clean Filter Controls */}
-        <div className="flex items-center gap-1.5 p-1 rounded-lg border border-[#E5E7EB] bg-[#F7F8FA] overflow-x-auto max-w-full">
+        {/* Clean Filter Controls: Touch-friendly with smooth horizontal scroll on mobile */}
+        <div className="flex items-center gap-1.5 p-1 rounded-lg border border-[#E5E7EB] bg-[#F7F8FA] overflow-x-auto max-w-full no-scrollbar">
           {[
             { id: "all", label: "All Services" },
             { id: "engineering", label: "Engineering" },
@@ -213,7 +213,7 @@ export default function WhatWeDoSection() {
                 setFilter(tab.id as typeof filter);
               }}
               data-cursor="FILTER"
-              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors shrink-0 ${
+              className={`px-3 py-2 sm:py-1.5 rounded-md text-xs font-medium transition-colors shrink-0 min-h-[38px] flex items-center justify-center ${
                 filter === tab.id
                   ? "bg-white text-[#161B26] font-semibold shadow-xs"
                   : "text-[#515B6B] hover:text-[#161B26]"
@@ -225,8 +225,8 @@ export default function WhatWeDoSection() {
         </div>
       </div>
 
-      {/* Services Grid: Clean Architectural White Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Services Grid: 1 column on mobile, 2 on tablet, 4 on desktop */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {filteredServices.map((service, idx) => {
           const Icon = service.icon;
           return (
@@ -235,10 +235,10 @@ export default function WhatWeDoSection() {
               onClick={() => handleServiceSelect(service)}
               onMouseEnter={() => sound.playHover()}
               data-cursor="EXPAND"
-              className="group p-6 rounded-xl bg-white border border-[#E5E7EB] hover:border-[#D1D5DB] hover:shadow-[0_8px_20px_-4px_rgba(15,23,42,0.08)] cursor-pointer flex flex-col justify-between transition-all duration-200"
+              className="group p-5 sm:p-6 rounded-xl bg-white border border-[#E5E7EB] hover:border-[#D1D5DB] active:border-[#245BDB] hover:shadow-[0_8px_20px_-4px_rgba(15,23,42,0.08)] cursor-pointer flex flex-col justify-between transition-all duration-200"
             >
               <div>
-                <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center justify-between mb-4 sm:mb-5">
                   <div className="w-10 h-10 rounded-lg bg-[#F7F8FA] border border-[#E5E7EB] flex items-center justify-center text-[#245BDB] group-hover:bg-[#F0F5FF] transition-colors">
                     <Icon className="w-5 h-5" />
                   </div>
@@ -247,34 +247,34 @@ export default function WhatWeDoSection() {
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-[#161B26] mb-2 group-hover:text-[#245BDB] transition-colors">
+                <h3 className="text-base sm:text-lg font-bold text-[#161B26] mb-2 group-hover:text-[#245BDB] transition-colors">
                   {service.name}
                 </h3>
 
-                <p className="text-sm text-[#515B6B] leading-relaxed mb-6 line-clamp-3">
+                <p className="text-xs sm:text-sm text-[#515B6B] leading-relaxed mb-5 sm:mb-6 line-clamp-3">
                   {service.description}
                 </p>
               </div>
 
               <div>
                 {/* Tech Pills */}
-                <div className="flex flex-wrap gap-1.5 mb-5">
+                <div className="flex flex-wrap gap-1.5 mb-4 sm:mb-5">
                   {service.techStack.slice(0, 3).map((tech) => (
                     <span
                       key={tech}
-                      className="px-2 py-0.5 rounded text-[11px] font-mono bg-[#F7F8FA] text-[#515B6B]"
+                      className="px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-mono bg-[#F7F8FA] text-[#515B6B]"
                     >
                       {tech}
                     </span>
                   ))}
                   {service.techStack.length > 3 && (
-                    <span className="px-1 py-0.5 text-[11px] font-mono text-[#737D8C]">
+                    <span className="px-1 py-0.5 text-[10px] sm:text-[11px] font-mono text-[#737D8C]">
                       +{service.techStack.length - 3}
                     </span>
                   )}
                 </div>
 
-                <div className="pt-4 border-t border-[#E5E7EB]/60 flex items-center justify-between text-xs font-medium text-[#515B6B] group-hover:text-[#245BDB] transition-colors">
+                <div className="pt-3.5 sm:pt-4 border-t border-[#E5E7EB]/60 flex items-center justify-between text-xs font-medium text-[#515B6B] group-hover:text-[#245BDB] transition-colors">
                   <span>View Details</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </div>
@@ -284,10 +284,10 @@ export default function WhatWeDoSection() {
         })}
       </div>
 
-      {/* Interactive Detail Modal */}
+      {/* Interactive Detail Modal: Optimized for Mobile Touch & Keyboard Escape */}
       {selectedService && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#161B26]/40 backdrop-blur-xs animate-fade-in duration-150">
-          <div className="relative max-w-xl w-full p-6 sm:p-8 rounded-xl bg-white border border-[#E5E7EB] shadow-[0_20px_48px_rgba(15,23,42,0.16)] max-h-[88vh] overflow-y-auto animate-fade-in-up">
+        <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#161B26]/40 backdrop-blur-xs animate-fade-in duration-150">
+          <div className="relative w-full sm:max-w-xl p-5 sm:p-8 rounded-t-2xl sm:rounded-xl bg-white border border-[#E5E7EB] shadow-[0_20px_48px_rgba(15,23,42,0.16)] max-h-[90vh] sm:max-h-[88vh] overflow-y-auto animate-fade-in-up">
             <button
               onClick={() => {
                 sound.playClick();
@@ -295,29 +295,29 @@ export default function WhatWeDoSection() {
               }}
               aria-label="Close dialog"
               data-cursor="CLOSE"
-              className="absolute top-5 right-5 p-1.5 rounded-lg text-[#515B6B] hover:text-[#161B26] hover:bg-[#F7F8FA] transition-colors"
+              className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2 rounded-lg text-[#515B6B] hover:text-[#161B26] hover:bg-[#F7F8FA] min-h-[40px] min-w-[40px] flex items-center justify-center transition-colors"
             >
               ✕
             </button>
 
-            <div className="flex items-center gap-3.5 mb-5 pr-8">
-              <div className="w-11 h-11 rounded-lg bg-[#F0F5FF] border border-[#E5E7EB] flex items-center justify-center text-[#245BDB] shrink-0">
-                <selectedService.icon className="w-6 h-6" />
+            <div className="flex items-center gap-3 sm:gap-3.5 mb-4 sm:mb-5 pr-8">
+              <div className="w-10 sm:w-11 h-10 sm:h-11 rounded-lg bg-[#F0F5FF] border border-[#E5E7EB] flex items-center justify-center text-[#245BDB] shrink-0">
+                <selectedService.icon className="w-5 sm:w-6 h-5 sm:h-6" />
               </div>
               <div>
-                <span className="text-[11px] font-mono uppercase tracking-wider text-[#737D8C]">
+                <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-[#737D8C]">
                   DISCIPLINE SPECIFICATION
                 </span>
-                <h3 className="text-xl font-bold text-[#161B26]">{selectedService.name}</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-[#161B26]">{selectedService.name}</h3>
               </div>
             </div>
 
-            <p className="text-sm text-[#515B6B] leading-relaxed mb-6">
+            <p className="text-xs sm:text-sm text-[#515B6B] leading-relaxed mb-5 sm:mb-6">
               {selectedService.description}
             </p>
 
-            <div className="mb-6">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-[#161B26] font-semibold mb-3">
+            <div className="mb-5 sm:mb-6">
+              <h4 className="text-[11px] sm:text-xs font-mono uppercase tracking-wider text-[#161B26] font-semibold mb-2.5 sm:mb-3">
                 KEY DELIVERABLES & OUTCOMES
               </h4>
               <div className="space-y-2">
@@ -330,15 +330,15 @@ export default function WhatWeDoSection() {
               </div>
             </div>
 
-            <div className="mb-6">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-[#737D8C] font-semibold mb-2">
+            <div className="mb-5 sm:mb-6">
+              <h4 className="text-[11px] sm:text-xs font-mono uppercase tracking-wider text-[#737D8C] font-semibold mb-2">
                 TECHNOLOGY & TOOLING
               </h4>
               <div className="flex flex-wrap gap-1.5">
                 {selectedService.techStack.map((tech) => (
                   <span
                     key={tech}
-                    className="px-2.5 py-1 rounded text-xs font-mono bg-[#F7F8FA] border border-[#E5E7EB] text-[#515B6B]"
+                    className="px-2 sm:px-2.5 py-1 rounded text-[11px] sm:text-xs font-mono bg-[#F7F8FA] border border-[#E5E7EB] text-[#515B6B]"
                   >
                     {tech}
                   </span>
@@ -346,14 +346,14 @@ export default function WhatWeDoSection() {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-5 border-t border-[#E5E7EB]">
-              <span className="text-xs font-mono text-emerald-600">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 sm:pt-5 border-t border-[#E5E7EB]">
+              <span className="text-xs font-mono text-emerald-600 text-center sm:text-left">
                 ● Available for New Engagements
               </span>
               <button
                 onClick={() => handleInquire(selectedService.name)}
                 data-cursor="ENGAGE"
-                className="px-5 py-2.5 rounded-lg text-xs font-semibold uppercase tracking-wider text-white bg-[#245BDB] hover:bg-[#1948B8] transition-colors text-center"
+                className="px-5 py-3 rounded-lg text-xs font-semibold uppercase tracking-wider text-white bg-[#245BDB] hover:bg-[#1948B8] transition-colors text-center min-h-[44px] flex items-center justify-center"
               >
                 Inquire For This Service →
               </button>

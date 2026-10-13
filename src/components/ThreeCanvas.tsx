@@ -19,9 +19,10 @@ export default function ThreeCanvas({ currentSection = 0 }: ThreeCanvasProps) {
     const container = containerRef.current;
     if (!container) return;
 
-    // Check if user prefers reduced motion
+    // Check if user prefers reduced motion or is on mobile/touch screen (< 768px)
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) {
+    const isMobileScreen = window.innerWidth < 768;
+    if (prefersReducedMotion || isMobileScreen) {
       return;
     }
 
