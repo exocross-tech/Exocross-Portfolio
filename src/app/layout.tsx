@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.exocross.com"),
   title: "Exocross — Software, built for how your business actually works",
   description:
     "Exocross is a next-generation software and IT studio. We design and build web and mobile applications, put AI to practical use, and help businesses get more from technology.",
@@ -34,6 +35,9 @@ export const metadata: Metadata = {
     ],
     shortcut: "/logo.png",
     apple: "/apple-icon.png",
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "google28285d40d8d7d59b",
   },
 };
 
