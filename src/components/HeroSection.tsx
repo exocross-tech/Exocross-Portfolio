@@ -129,14 +129,6 @@ export default function HeroSection() {
                     className="w-full h-full object-cover pointer-events-none"
                   />
                 </div>
-
-                <div className="px-2 pt-2.5 pb-1 flex items-center justify-between text-[11px] font-mono text-[#737D8C]">
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span>ACTIVE SHOWCASE</span>
-                  </span>
-                  <span>1080P // STREAM</span>
-                </div>
               </div>
             </div>
           </div>
