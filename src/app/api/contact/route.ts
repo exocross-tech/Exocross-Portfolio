@@ -4,7 +4,7 @@ import { Resend } from "resend";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, company, services, budget, message } = body;
+    const { name, email, phone, company, services, budget, message } = body;
 
     // Basic validation
     if (!name || typeof name !== "string" || !name.trim()) {
@@ -51,6 +51,7 @@ export async function POST(req: Request) {
 
     const budgetScope = budget || "Flexible / Not specified";
     const companyName = company && company.trim() ? company.trim() : "Individual / Not specified";
+    const phoneNumber = phone && phone.trim() ? phone.trim() : "Not provided";
 
     const emailHtml = `
       <!DOCTYPE html>
@@ -101,6 +102,12 @@ export async function POST(req: Request) {
                           <td style="padding: 10px 0; color: #778191; font-weight: 600; font-family: monospace; font-size: 12px;">WORK EMAIL:</td>
                           <td style="padding: 10px 0;">
                             <a href="mailto:${email}" style="color: #245BDB; text-decoration: none; font-weight: 600;">${email}</a>
+                          </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #F2F4F7;">
+                          <td style="padding: 10px 0; color: #778191; font-weight: 600; font-family: monospace; font-size: 12px;">PHONE NUMBER:</td>
+                          <td style="padding: 10px 0;">
+                            ${phone && phone.trim() ? `<a href="tel:${phone.trim()}" style="color: #245BDB; text-decoration: none; font-weight: 600;">${phone.trim()}</a>` : `<span style="color: #778191;">Not provided</span>`}
                           </td>
                         </tr>
                         <tr style="border-bottom: 1px solid #F2F4F7;">

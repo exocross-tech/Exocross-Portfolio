@@ -26,6 +26,7 @@ export default function GetInTouchSection() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     company: "",
     message: "",
   });
@@ -79,6 +80,7 @@ export default function GetInTouchSection() {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
+          phone: formData.phone,
           company: formData.company,
           services: selectedServices,
           budget,
@@ -109,6 +111,7 @@ export default function GetInTouchSection() {
       setFormData({
         name: "",
         email: "",
+        phone: "",
         company: "",
         message: "",
       });
@@ -385,17 +388,33 @@ export default function GetInTouchSection() {
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-[11px] sm:text-xs font-mono text-[#535D6B] mb-1">
-                    COMPANY / ORGANIZATION
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Acme Technologies"
-                    value={formData.company}
-                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full px-3.5 py-3 sm:py-2.5 rounded-lg bg-white border border-[#E4E7EC] text-[#151A23] text-sm focus:border-[#245BDB] focus:outline-none focus:ring-1 focus:ring-[#245BDB] transition-colors"
-                  />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
+                  <div>
+                    <label className="block text-[11px] sm:text-xs font-mono text-[#535D6B] mb-1">
+                      PHONE NUMBER *
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="e.g. +91 98765 43210"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full px-3.5 py-3 sm:py-2.5 rounded-lg bg-white border border-[#E4E7EC] text-[#151A23] text-sm focus:border-[#245BDB] focus:outline-none focus:ring-1 focus:ring-[#245BDB] transition-colors"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] sm:text-xs font-mono text-[#535D6B] mb-1">
+                      COMPANY / ORGANIZATION
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Acme Technologies"
+                      value={formData.company}
+                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                      className="w-full px-3.5 py-3 sm:py-2.5 rounded-lg bg-white border border-[#E4E7EC] text-[#151A23] text-sm focus:border-[#245BDB] focus:outline-none focus:ring-1 focus:ring-[#245BDB] transition-colors"
+                    />
+                  </div>
                 </div>
 
                 <div>
