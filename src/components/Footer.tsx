@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { sound } from "@/lib/sound";
 import { ArrowUp } from "lucide-react";
+import { getWhatsAppUrl, WHATSAPP_NUMBERS } from "@/lib/whatsapp";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -112,6 +113,18 @@ export default function Footer() {
                 <span className="text-[#151A23] font-medium inline-block py-0.5">
                   Chennai, Tamil Nadu, India
                 </span>
+              </div>
+              <div>
+                <span className="text-[10px] sm:text-[11px] text-[#778191] font-mono block">WHATSAPP CHAT</span>
+                <a
+                  href={getWhatsAppUrl(WHATSAPP_NUMBERS.primary)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#151A23] hover:text-[#25D366] font-medium transition-colors inline-flex items-center gap-1.5 py-0.5"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#25D366]" />
+                  <span>Start WhatsApp Chat →</span>
+                </a>
               </div>
               <div className="pt-2">
                 <button

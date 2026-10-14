@@ -11,6 +11,7 @@ import HowWeWorkSection from "@/components/HowWeWorkSection";
 import WhatsNewSection from "@/components/WhatsNewSection";
 import GetInTouchSection from "@/components/GetInTouchSection";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 // Lazy load non-critical visual enhancements so they don't block FCP/LCP
 const CustomCursor = dynamic(() => import("@/components/CustomCursor"), { ssr: false });
@@ -107,6 +108,9 @@ export default function Home() {
         {/* Footer */}
         <Footer />
       </div>
+
+      {/* Floating Ambient WhatsApp Quick Chat Action */}
+      <WhatsAppButton />
     </div>
   );
 }

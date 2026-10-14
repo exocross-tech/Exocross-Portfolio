@@ -15,7 +15,10 @@ import {
   ShieldCheck,
   Loader2,
   AlertCircle,
+  MessageSquare,
+  ArrowUpRight,
 } from "lucide-react";
+import { getWhatsAppUrl, WHATSAPP_NUMBERS } from "@/lib/whatsapp";
 
 export default function GetInTouchSection() {
   const [selectedServices, setSelectedServices] = useState<string[]>(["Web Applications"]);
@@ -176,6 +179,51 @@ export default function GetInTouchSection() {
                 </button>
               </div>
 
+              {/* WhatsApp Instant Chat */}
+              <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-[#E4E7EC] hover:border-[#25D366] flex items-center justify-between transition-colors group">
+                <div className="flex items-center gap-2.5 sm:gap-3">
+                  <div className="p-2 rounded-lg bg-emerald-50 text-[#25D366] shrink-0 border border-emerald-100">
+                    <MessageSquare className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[10px] text-[#778191] block uppercase">WhatsApp Instant Chat</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
+                    </div>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2.5 text-xs sm:text-sm">
+                      <a
+                        href={getWhatsAppUrl(WHATSAPP_NUMBERS.primary)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#151A23] hover:text-[#25D366] font-medium transition-colors"
+                      >
+                        +91 7604 830 742
+                      </a>
+                      <span className="hidden sm:inline text-[#778191]">•</span>
+                      <a
+                        href={getWhatsAppUrl(WHATSAPP_NUMBERS.secondary)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#151A23] hover:text-[#25D366] font-medium transition-colors"
+                      >
+                        +91 81244 73373
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <a
+                  href={getWhatsAppUrl(WHATSAPP_NUMBERS.primary)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open WhatsApp Chat"
+                  data-cursor="CHAT"
+                  className="p-2 rounded-lg text-[#25D366] hover:bg-emerald-50 min-h-[40px] min-w-[40px] flex items-center justify-center shrink-0 transition-colors"
+                >
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+              </div>
+
               {/* Website */}
               <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-[#E4E7EC] flex items-center gap-2.5 sm:gap-3">
                 <div className="p-2 rounded-lg bg-[#F0F5FF] text-[#245BDB] shrink-0">
@@ -191,31 +239,6 @@ export default function GetInTouchSection() {
                   >
                     www.exocross.com
                   </a>
-                </div>
-              </div>
-
-              {/* Phone */}
-              <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-[#E4E7EC] flex items-center gap-2.5 sm:gap-3">
-                <div className="p-2 rounded-lg bg-[#F0F5FF] text-[#245BDB] shrink-0">
-                  <Phone className="w-4 h-4" />
-                </div>
-                <div className="min-w-0">
-                  <span className="text-[10px] text-[#778191] block uppercase">Direct Client Lines</span>
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-xs sm:text-sm">
-                    <a
-                      href="tel:+917604830742"
-                      className="text-[#151A23] hover:text-[#245BDB] font-medium transition-colors"
-                    >
-                      +91 7604 830 742
-                    </a>
-                    <span className="hidden sm:inline text-[#778191]">•</span>
-                    <a
-                      href="tel:+918124473373"
-                      className="text-[#151A23] hover:text-[#245BDB] font-medium transition-colors"
-                    >
-                      +91 81244 73373
-                    </a>
-                  </div>
                 </div>
               </div>
 
