@@ -13,6 +13,8 @@ import {
   Send,
   Clock,
   ShieldCheck,
+  Loader2,
+  AlertCircle,
 } from "lucide-react";
 
 export default function GetInTouchSection() {
@@ -26,6 +28,8 @@ export default function GetInTouchSection() {
   });
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const availableServices = [
     "Web Applications",
@@ -53,27 +57,64 @@ export default function GetInTouchSection() {
 
   const handleCopyEmail = () => {
     sound.playClick();
-    navigator.clipboard.writeText("contact@exocross.com");
+    navigator.clipboard.writeText("exocross.tech@gmail.com");
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    sound.playPowerOn();
+    setIsSubmitting(true);
+    setErrorMessage(null);
 
     try {
-      confetti({
-        particleCount: 60,
-        spread: 60,
-        origin: { y: 0.6 },
-        colors: ["#245bdb", "#24a6c8", "#535d6b", "#151a23"],
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          services: selectedServices,
+          budget,
+          message: formData.message,
+        }),
       });
-    } catch {
-      // Fallback
-    }
 
-    setSubmitted(true);
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to dispatch message.");
+      }
+
+      sound.playPowerOn();
+
+      try {
+        confetti({
+          particleCount: 70,
+          spread: 60,
+          origin: { y: 0.6 },
+          colors: ["#245bdb", "#24a6c8", "#535d6b", "#151a23"],
+        });
+      } catch {
+        // Fallback
+      }
+
+      setSubmitted(true);
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        message: "",
+      });
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Failed to dispatch message.";
+      setErrorMessage(msg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -112,7 +153,12 @@ export default function GetInTouchSection() {
                   </div>
                   <div className="min-w-0">
                     <span className="text-[10px] text-[#778191] block uppercase">Business Email</span>
-                    <span className="text-[#151A23] font-medium select-all text-xs sm:text-sm truncate block">contact@exocross.com</span>
+                    <a
+                      href="mailto:exocross.tech@gmail.com"
+                      className="text-[#151A23] hover:text-[#245BDB] font-medium text-xs sm:text-sm truncate block transition-colors"
+                    >
+                      exocross.tech@gmail.com
+                    </a>
                   </div>
                 </div>
 
@@ -153,9 +199,23 @@ export default function GetInTouchSection() {
                 <div className="p-2 rounded-lg bg-[#F0F5FF] text-[#245BDB] shrink-0">
                   <Phone className="w-4 h-4" />
                 </div>
-                <div>
-                  <span className="text-[10px] text-[#778191] block uppercase">Direct Client Phone</span>
-                  <span className="text-[#151A23] font-medium">+1 (800) 396-2767</span>
+                <div className="min-w-0">
+                  <span className="text-[10px] text-[#778191] block uppercase">Direct Client Lines</span>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-xs sm:text-sm">
+                    <a
+                      href="tel:+917604830742"
+                      className="text-[#151A23] hover:text-[#245BDB] font-medium transition-colors"
+                    >
+                      +91 7604 830 742
+                    </a>
+                    <span className="hidden sm:inline text-[#778191]">•</span>
+                    <a
+                      href="tel:+918124473373"
+                      className="text-[#151A23] hover:text-[#245BDB] font-medium transition-colors"
+                    >
+                      +91 81244 73373
+                    </a>
+                  </div>
                 </div>
               </div>
 
@@ -167,7 +227,7 @@ export default function GetInTouchSection() {
                 <div>
                   <span className="text-[10px] text-[#778191] block uppercase">Headquarters</span>
                   <span className="text-[#151A23] font-medium">
-                    Global Remote-First Studio (New York & Worldwide)
+                    Chennai, Tamil Nadu, India
                   </span>
                 </div>
               </div>
@@ -329,13 +389,42 @@ export default function GetInTouchSection() {
                   />
                 </div>
 
+                {errorMessage && (
+                  <div className="p-3.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-850 text-xs flex items-start gap-2.5 animate-in fade-in">
+                    <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                    <div className="leading-relaxed">
+                      <span className="font-medium text-rose-900">{errorMessage}</span>
+                      <span className="block mt-1 text-[11px] text-rose-700">
+                        You can also contact our team directly at{" "}
+                        <a href="mailto:exocross.tech@gmail.com" className="font-semibold underline">
+                          exocross.tech@gmail.com
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                )}
+
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   data-cursor="SUBMIT"
-                  className="w-full py-3.5 rounded-lg font-mono text-xs font-bold uppercase tracking-wider text-white bg-[#245BDB] hover:bg-[#1948B8] active:bg-[#153e9f] transition-colors flex items-center justify-center gap-2 min-h-[48px]"
+                  className={`w-full py-3.5 rounded-lg font-mono text-xs font-bold uppercase tracking-wider text-white transition-all flex items-center justify-center gap-2 min-h-[48px] ${
+                    isSubmitting
+                      ? "bg-[#245BDB]/70 cursor-not-allowed"
+                      : "bg-[#245BDB] hover:bg-[#1948B8] active:bg-[#153e9f]"
+                  }`}
                 >
-                  <Send className="w-3.5 h-3.5 shrink-0" />
-                  <span>Transmit Inquiry to Exocross</span>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 shrink-0 animate-spin" />
+                      <span>Transmitting Inquiry to Exocross...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-3.5 h-3.5 shrink-0" />
+                      <span>Transmit Inquiry to Exocross</span>
+                    </>
+                  )}
                 </button>
               </form>
             )}

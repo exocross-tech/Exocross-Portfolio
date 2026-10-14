@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { sound } from "@/lib/sound";
 import {
   Globe,
@@ -160,6 +161,29 @@ export const servicesData: ServiceItem[] = [
 export default function WhatWeDoSection() {
   const [filter, setFilter] = useState<"all" | "engineering" | "cloud-ai" | "strategy">("all");
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (selectedService) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setSelectedService(null);
+        }
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [selectedService]);
 
   const filteredServices = servicesData.filter((item) =>
     filter === "all" ? true : item.category === filter
@@ -285,9 +309,19 @@ export default function WhatWeDoSection() {
       </div>
 
       {/* Interactive Detail Modal: Optimized for Mobile Touch & Keyboard Escape */}
-      {selectedService && (
-        <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#161B26]/40 backdrop-blur-xs animate-fade-in duration-150">
-          <div className="relative w-full sm:max-w-xl p-5 sm:p-8 rounded-t-2xl sm:rounded-xl bg-white border border-[#E5E7EB] shadow-[0_20px_48px_rgba(15,23,42,0.16)] max-h-[90vh] sm:max-h-[88vh] overflow-y-auto animate-fade-in-up">
+      {selectedService && mounted && createPortal(
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              sound.playClick();
+              setSelectedService(null);
+            }
+          }}
+          className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#0B0F19]/75 backdrop-blur-sm animate-in fade-in duration-150"
+        >
+          <div className="relative w-full sm:max-w-xl p-5 sm:p-8 rounded-t-2xl sm:rounded-xl bg-white border border-[#E5E7EB] shadow-[0_24px_64px_rgba(0,0,0,0.35)] max-h-[90vh] sm:max-h-[88vh] overflow-y-auto animate-fade-in-up">
             <button
               onClick={() => {
                 sound.playClick();
@@ -359,7 +393,8 @@ export default function WhatWeDoSection() {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );

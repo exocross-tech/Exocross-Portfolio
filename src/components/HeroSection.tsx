@@ -38,7 +38,8 @@ export default function HeroSection() {
             loop
             muted
             playsInline
-            preload="metadata"
+            preload="none"
+            poster="/hero-poster.jpg"
             disablePictureInPicture
             disableRemotePlayback
             controlsList="nodownload nofullscreen noremoteplayback noplaybackrate"
@@ -119,6 +120,8 @@ export default function HeroSection() {
                     loop
                     muted
                     playsInline
+                    preload="none"
+                    poster="/hero-poster.jpg"
                     disablePictureInPicture
                     disableRemotePlayback
                     controlsList="nodownload nofullscreen noremoteplayback noplaybackrate"

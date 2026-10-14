@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { sound } from "@/lib/sound";
 import { ExternalLink } from "lucide-react";
@@ -122,6 +123,29 @@ export const projectsData: ProjectItem[] = [
 export default function WhatWeMadeSection() {
   const [filter, setFilter] = useState<"all" | "in-house" | "client">("all");
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setSelectedProject(null);
+        }
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [selectedProject]);
 
   const filteredProjects = projectsData.filter((p) =>
     filter === "all" ? true : p.type === filter
@@ -275,9 +299,19 @@ export default function WhatWeMadeSection() {
       </div>
 
       {/* Interactive Project Deep-Dive Modal */}
-      {selectedProject && (
-        <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#161B26]/40 backdrop-blur-xs animate-fade-in duration-150">
-          <div className="relative w-full sm:max-w-2xl p-5 sm:p-8 rounded-t-2xl sm:rounded-xl bg-white border border-[#E5E7EB] shadow-[0_20px_48px_rgba(15,23,42,0.16)] max-h-[90vh] sm:max-h-[88vh] overflow-y-auto animate-fade-in-up">
+      {selectedProject && mounted && createPortal(
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              sound.playClick();
+              setSelectedProject(null);
+            }
+          }}
+          className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#0B0F19]/75 backdrop-blur-sm animate-in fade-in duration-150"
+        >
+          <div className="relative w-full sm:max-w-2xl p-5 sm:p-8 rounded-t-2xl sm:rounded-xl bg-white border border-[#E5E7EB] shadow-[0_24px_64px_rgba(0,0,0,0.35)] max-h-[90vh] sm:max-h-[88vh] overflow-y-auto animate-fade-in-up">
             <button
               onClick={() => {
                 sound.playClick();
@@ -345,7 +379,7 @@ export default function WhatWeMadeSection() {
                 {selectedProject.tags.map((t) => (
                   <span
                     key={t}
-                    className="px-2 sm:px-2.5 py-0.5 rounded text-[11px] sm:text-xs font-mono bg-[#F7F8FA] border border-[#E5E7EB] text-[#515B6B]"
+                    className="px-2 sm:px-2.5 py-1 rounded text-[11px] sm:text-xs font-mono bg-[#F7F8FA] border border-[#E5E7EB] text-[#515B6B]"
                   >
                     {t}
                   </span>
@@ -371,7 +405,8 @@ export default function WhatWeMadeSection() {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );

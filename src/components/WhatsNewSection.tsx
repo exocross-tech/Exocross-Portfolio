@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { sound } from "@/lib/sound";
 import { Calendar, Clock, ArrowUpRight, BookOpen } from "lucide-react";
 
@@ -80,6 +81,29 @@ export const articlesData: ArticleItem[] = [
 
 export default function WhatsNewSection() {
   const [selectedArticle, setSelectedArticle] = useState<ArticleItem | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (selectedArticle) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setSelectedArticle(null);
+        }
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [selectedArticle]);
 
   return (
     <section
@@ -171,10 +195,20 @@ export default function WhatsNewSection() {
         ))}
       </div>
 
-      {/* Article Detail Modal: Full mobile drawer style on mobile, centered modal on desktop */}
-      {selectedArticle && (
-        <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#151A23]/40 backdrop-blur-xs animate-in fade-in duration-150">
-          <div className="relative w-full sm:max-w-2xl p-5 sm:p-8 rounded-t-2xl sm:rounded-xl bg-white border border-[#E4E7EC] shadow-[0_20px_48px_rgba(16,24,40,0.16)] max-h-[90vh] sm:max-h-[88vh] overflow-y-auto">
+      {/* Article Detail Modal: Portaled to document.body to avoid stacking context collisions */}
+      {selectedArticle && mounted && createPortal(
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              sound.playClick();
+              setSelectedArticle(null);
+            }
+          }}
+          className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#0B0F19]/75 backdrop-blur-sm animate-in fade-in duration-150"
+        >
+          <div className="relative w-full sm:max-w-2xl p-5 sm:p-8 rounded-t-2xl sm:rounded-xl bg-white border border-[#E4E7EC] shadow-[0_24px_64px_rgba(0,0,0,0.35)] max-h-[90vh] sm:max-h-[88vh] overflow-y-auto">
             <button
               onClick={() => {
                 sound.playClick();
@@ -224,7 +258,8 @@ export default function WhatsNewSection() {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );

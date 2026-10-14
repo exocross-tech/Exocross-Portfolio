@@ -237,7 +237,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
               </button>
               <div className="text-center">
                 <span className="text-[10px] font-mono text-[#778191]">
-                  contact@exocross.com • 24h Response
+                  exocross.tech@gmail.com • 24h Response
                 </span>
               </div>
             </div>

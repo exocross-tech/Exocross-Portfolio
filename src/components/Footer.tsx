@@ -84,15 +84,34 @@ export default function Footer() {
               <div>
                 <span className="text-[10px] sm:text-[11px] text-[#778191] font-mono block">INQUIRIES</span>
                 <a
-                  href="mailto:contact@exocross.com"
+                  href="mailto:exocross.tech@gmail.com"
                   className="text-[#151A23] hover:text-[#245BDB] font-medium transition-colors inline-block py-0.5"
                 >
-                  contact@exocross.com
+                  exocross.tech@gmail.com
                 </a>
               </div>
               <div>
-                <span className="text-[10px] sm:text-[11px] text-[#778191] font-mono block">WEB DOMAIN</span>
-                <span className="text-[#151A23] font-medium inline-block py-0.5">www.exocross.com</span>
+                <span className="text-[10px] sm:text-[11px] text-[#778191] font-mono block">DIRECT LINES</span>
+                <div className="flex flex-col gap-0.5 pt-0.5">
+                  <a
+                    href="tel:+917604830742"
+                    className="text-[#151A23] hover:text-[#245BDB] font-medium transition-colors"
+                  >
+                    +91 7604 830 742
+                  </a>
+                  <a
+                    href="tel:+918124473373"
+                    className="text-[#151A23] hover:text-[#245BDB] font-medium transition-colors"
+                  >
+                    +91 81244 73373
+                  </a>
+                </div>
+              </div>
+              <div>
+                <span className="text-[10px] sm:text-[11px] text-[#778191] font-mono block">HEADQUARTERS</span>
+                <span className="text-[#151A23] font-medium inline-block py-0.5">
+                  Chennai, Tamil Nadu, India
+                </span>
               </div>
               <div className="pt-2">
                 <button

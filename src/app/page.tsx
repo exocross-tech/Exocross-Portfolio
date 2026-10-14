@@ -1,10 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import LoadingScreen from "@/components/LoadingScreen";
-import CustomCursor from "@/components/CustomCursor";
-import ThreeCanvas from "@/components/ThreeCanvas";
-import BackgroundVideo from "@/components/BackgroundVideo";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import WhoWeAreSection from "@/components/WhoWeAreSection";
@@ -15,8 +12,12 @@ import WhatsNewSection from "@/components/WhatsNewSection";
 import GetInTouchSection from "@/components/GetInTouchSection";
 import Footer from "@/components/Footer";
 
+// Lazy load non-critical visual enhancements so they don't block FCP/LCP
+const CustomCursor = dynamic(() => import("@/components/CustomCursor"), { ssr: false });
+const ThreeCanvas = dynamic(() => import("@/components/ThreeCanvas"), { ssr: false });
+const BackgroundVideo = dynamic(() => import("@/components/BackgroundVideo"), { ssr: false });
+
 export default function Home() {
-  const [loading, setLoading] = useState(true);
   const [activeSectionId, setActiveSectionId] = useState<string>("hero");
   const [sectionIndex, setSectionIndex] = useState<number>(0);
 
@@ -64,9 +65,6 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-[#FFFFFF] text-[#151A23] selection:bg-[#245BDB] selection:text-white">
-      {/* Loading Splash */}
-      {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
-
       {/* Interactive Custom Cursor */}
       <CustomCursor />
 
